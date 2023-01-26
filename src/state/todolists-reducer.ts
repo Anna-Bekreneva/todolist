@@ -24,29 +24,31 @@ type ChangeTodoListTitleAT = {
 	todoListId: string
 }
 
-type ActionType = RemoveTodoListAT | AddTodoListAT | ChangeTodoListFilterAT | ChangeTodoListTitleAT
+export type ActionsType = RemoveTodoListAT | AddTodoListAT | ChangeTodoListFilterAT | ChangeTodoListTitleAT
 
-export const todolistsReducer = (todolists: Array<TodoListType>, action: ActionType): Array<TodoListType> => {
+const initialState: Array<TodoListType> = []
+
+export const todolistsReducer = (state: Array<TodoListType> = initialState, action: ActionsType): Array<TodoListType> => {
 	switch (action.type) {
 		case 'REMOVE-TODOLIST':
-			return todolists.filter(tl => tl.id !== action.todoListId)
+			return state.filter(tl => tl.id !== action.todoListId)
 		case 'ADD-TODOLIST':
 			const newTodoList: TodoListType = {
 				id: action.todoListId,
 				title: action.title,
 				filter: 'all'
 			};
-			return [...todolists, newTodoList]
+			return [...state, newTodoList]
 		case 'CHANGE-TODOLIST-FILTER':
-			return todolists.map(tl => tl.id === action.todoListId ? {...tl, filter: action.filter} : tl)
+			return state.map(tl => tl.id === action.todoListId ? {...tl, filter: action.filter} : tl)
 		case 'CHANGE-TODOLIST-TITLE':
-			return todolists.map(tl => tl.id === action.todoListId ? {...tl, title: action.title} : tl)
+			return state.map(tl => tl.id === action.todoListId ? {...tl, title: action.title} : tl)
 		default:
-			return todolists
+			return state
 	}
 }
 
-export const RemoveTodoListAС = (id: string): RemoveTodoListAT => ({type: 'REMOVE-TODOLIST', todoListId: id})
+export const RemoveTodoListAC = (id: string): RemoveTodoListAT => ({type: 'REMOVE-TODOLIST', todoListId: id})
 export const AddTodoListAC = (title: string): AddTodoListAT => ({type: 'ADD-TODOLIST', title: title, todoListId: v1()})
 export const ChangeTodoListFilterAC = (filter: FilterValuesType, todoListId: string): ChangeTodoListFilterAT => ({type: 'CHANGE-TODOLIST-FILTER', filter, todoListId})
 export const ChangeTodoListTitleAC = (title: string, todoListId: string): ChangeTodoListTitleAT => ({type: 'CHANGE-TODOLIST-TITLE', title, todoListId})

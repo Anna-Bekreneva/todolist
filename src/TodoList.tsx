@@ -2,8 +2,9 @@ import React, {ChangeEvent} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
-import {Button, Checkbox, List, ListItem} from '@material-ui/core';
-import {DeleteForeverOutlined} from '@material-ui/icons';
+import {Button, Checkbox, List, ListItem} from '@mui/material';
+import {DeleteForeverOutlined} from '@mui/icons-material';
+
 
 type TodoListPropsType = {
 	todoListId: string
