@@ -24,6 +24,15 @@ const TodoListWithRedux = ({todolist}: PropsType) => {
 	const {id, title, filter} = todolist
 
 	const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[id])
+	let tasksFiltered = tasks
+
+	if (filter === 'active') {
+		tasksFiltered = tasksFiltered.filter(task => !task.isDone)
+	}
+
+	if (filter === 'completed') {
+		tasksFiltered = tasksFiltered.filter(task => task.isDone)
+	}
 	const dispatch = useDispatch()
 
 	const getTasksListItem = (t: TaskType) => {
@@ -33,7 +42,9 @@ const TodoListWithRedux = ({todolist}: PropsType) => {
 		const changeTaskStatus = (event: ChangeEvent<HTMLInputElement>) => {
 			dispatch(changeTaskStatusAC(t.id, event.currentTarget.checked, id))
 		}
+
 		const changeTaskTitle = (title: string) => dispatch(changeTaskTitleAC(t.id, title, id))
+
 		return (
 			<ListItem key={t.id} className={t.isDone ? 'isDone' : ''} style={{padding: "0"}}>
 				<Checkbox checked={t.isDone} onChange={changeTaskStatus} size={'small'}></Checkbox>
@@ -43,11 +54,11 @@ const TodoListWithRedux = ({todolist}: PropsType) => {
 		);
 	};
 
-	const tasksList = tasks.length > 0 ? <List> {tasks.map(getTasksListItem)} </List> :
+	const tasksList = tasks.length > 0 ? <List> {tasksFiltered.map(getTasksListItem)} </List> :
 		<span> Your tasks list is empty </span>;
 
 	const addTask = (title: string) => dispatch(addTaskAC(title, id))
-	const handlerCreator = (filter: FilterValuesType) => () => dispatch(dispatch(ChangeTodoListFilterAC(filter, id)))
+	const handlerCreator = (filter: FilterValuesType) => () => dispatch(ChangeTodoListFilterAC(filter, id))
 	const changeTodoListTitle = (title: string) => dispatch(ChangeTodoListTitleAC(title, id))
 	const removeTodoList = () => dispatch(RemoveTodoListAC(id))
 

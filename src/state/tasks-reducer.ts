@@ -36,10 +36,6 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
 		}
 
 		case 'REMOVE-TODOLIST': {
-			// const copyState = {...state}
-			// delete copyState[action.todoListId]
-			// return copyState
-
 			const {[action.todoListId] : [], ...rest} = {...state}
 			return rest
 		}
@@ -51,6 +47,6 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
 
 export const removeTaskAC = (taskId: string, todolistId: string) => ({type: 'REMOVE-TASK', taskId, todolistId} as const)
 export const addTaskAC = (title: string, todolistId: string) => ({type: 'ADD-TASK', title, todolistId} as const)
-export const changeTaskStatusAC = (taskId: string, isDone: boolean, todolistId: string) => ({type: 'CHANGE-STATUS-TASK', taskId, isDone: false, todolistId} as const)
+export const changeTaskStatusAC = (taskId: string, isDone: boolean, todolistId: string) => ({type: 'CHANGE-STATUS-TASK', taskId, isDone, todolistId} as const)
 export const changeTaskTitleAC = (taskId: string, title: string, todolistId: string) => ({type: 'CHANGE-TITLE-TASK', taskId, title, todolistId} as const)
 
