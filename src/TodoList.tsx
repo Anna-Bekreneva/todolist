@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, memo, useCallback} from 'react';
 import {FilterValuesType} from './App';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
@@ -26,7 +26,7 @@ export type TaskType = {
 	isDone: boolean
 }
 
-const TodoList = (props: TodoListPropsType) => {
+const TodoList = memo((props: TodoListPropsType) => {
 	const getTasksListItem = (t: TaskType) => {
 
 		//D:
@@ -48,9 +48,7 @@ const TodoList = (props: TodoListPropsType) => {
 		<span> Your tasks list is empty </span>;
 
 	//C:
-	const addTask = (title: string) => {
-		props.addTask(title, props.todoListId);
-	};
+	const addTask = useCallback((title: string) => props.addTask(title, props.todoListId), [props.addTask, props.todoListId])
 
 	//U:
 	const handlerCreator = (filter: FilterValuesType) => () => props.changeTodoListFilter(filter, props.todoListId);
@@ -79,6 +77,6 @@ const TodoList = (props: TodoListPropsType) => {
             </div>
         </div>
 	);
-};
+});
 
 export default TodoList;

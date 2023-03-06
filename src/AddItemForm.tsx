@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField/TextField';
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 import {IconButton} from '@mui/material';
 import {AddBoxOutlined} from '@mui/icons-material';
 
@@ -8,7 +8,7 @@ type AddItemFormPropsType = {
 	addItem: (title: string) => void
 }
 
-export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
+export const AddItemForm: React.FC<AddItemFormPropsType> = memo((props) => {
 	const [title, setTitle] = useState<string>('');
 	const [error, setError] = useState<boolean>(false);
 
@@ -39,4 +39,4 @@ export const AddItemForm: React.FC<AddItemFormPropsType> = (props) => {
 			</IconButton>
 		</div>
 	);
-};
+});
