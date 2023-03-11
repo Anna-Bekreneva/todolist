@@ -1,4 +1,4 @@
-import React, {memo, useCallback, useMemo} from 'react';
+import React, {memo, useCallback} from 'react';
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from './EditableSpan';
 import {Button, List} from '@mui/material';
@@ -42,13 +42,13 @@ const TodoListWithRedux = memo(({todolist}: PropsType) => {
 
 	const tasksList = tasks.length > 0 ? <List> {tasksFiltered.map(getTasksListItem)} </List> : <span> Your tasks list is empty </span>;
 
-	const addTask = useCallback((title: string) => dispatch(addTaskAC(title, id)), [dispatch]);
+	const addTask = useCallback((title: string) => dispatch(addTaskAC(title, id)), [dispatch, id]);
 
-	const onAllClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC('all', id)), [dispatch])
-	const onActiveClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC('active', id)), [dispatch])
-	const onCompletedClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC('completed', id)), [dispatch])
+	const onAllClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC('all', id)), [dispatch, id])
+	const onActiveClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC('active', id)), [dispatch, id])
+	const onCompletedClickHandler = useCallback(() => dispatch(ChangeTodoListFilterAC('completed', id)), [dispatch, id])
 
-	const changeTodoListTitle = useCallback((title: string) => dispatch(ChangeTodoListTitleAC(title, id)), [dispatch])
+	const changeTodoListTitle = useCallback((title: string) => dispatch(ChangeTodoListTitleAC(title, id)), [dispatch, id])
 	const removeTodoList = () => dispatch(RemoveTodoListAC(id));
 
 	return (

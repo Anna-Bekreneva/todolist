@@ -17,9 +17,9 @@ export const TaskWithRedux: React.FC<TaskTypeProps> = memo(({task, todolistId}) 
 
 	const onClickHandler = () => dispatch(removeTaskAC(id, todolistId))
 
-	const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => dispatch(changeTaskStatusAC(id, event.currentTarget.checked, todolistId)), [dispatch])
+	const onChangeHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => dispatch(changeTaskStatusAC(id, event.currentTarget.checked, todolistId)), [dispatch, id, todolistId])
 
-	const onTitleChangeHandler = useCallback((newTitle: string) => dispatch(changeTaskTitleAC(id, newTitle, todolistId)), [dispatch])
+	const onTitleChangeHandler = useCallback((newTitle: string) => dispatch(changeTaskTitleAC(id, newTitle, todolistId)), [dispatch, id, todolistId])
 
 	return (
 		<ListItem className={isDone ? 'isDone' : ''} style={{padding: "0"}}>
