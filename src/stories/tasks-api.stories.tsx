@@ -126,8 +126,16 @@ export const UpdateTaskTitle = () => {
     const onChangeHandlerTaskId = (event: ChangeEvent<HTMLInputElement>) => setTaskId(event.currentTarget.value)
 
     const updateTask = () => {
-        todolistAPI.updateTask(todolistId, taskId, title)
+        todolistAPI.updateTask(todolistId, taskId, {
+            status: 1,
+            deadline: '',
+            priority: 1,
+            description: '',
+            startDate: '',
+            title: 'bla'
+        })
             .then((res) => {
+                debugger
                 setState(res.data)
             })
         setTodolistiId('')

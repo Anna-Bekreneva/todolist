@@ -25,17 +25,26 @@ export const todolistAPI = {
         return instance.get<GetTasksType>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string) {
-        return instance.post<TasksType>(`todo-lists/${todolistId}/tasks`, {title})
+        return instance.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title})
     },
-    updateTask(todolistId: string, taskId: string, title: string) {
-        return instance.put<TasksType>(`todo-lists/${todolistId}/tasks/${taskId}`, {title: title})
+    updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
+        return instance.put<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     },
     deleteTask(todolistId: string, taskId: string) {
-        return instance.delete<TasksType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
 }
 
-type TodolistType = {
+export type UpdateTaskModelType = {
+    title: string
+    description: string
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+}
+
+export type TodolistType = {
     id: string
     title: string
     addedDate: string
@@ -44,35 +53,41 @@ type TodolistType = {
 
 type ResponseType<T = {}> = {
     resultCode: number
-    fieldsError: string
+    fieldsErrors: string[]
     messages: string[]
     data: T
 }
 
-type TaskType = {
+export type TaskType = {
     id: string
     title: string
-    description: null | string
+    description: string
     todoListId: string
     order: number
-    status: number
-    priority: number
-    startDate: null | string
-    deadline: null | string
+    status: TaskStatuses
+    priority: TaskPriorities
+    startDate: string
+    deadline: string
     addedDate: string
 }
 
-type GetTasksType = {
+export type GetTasksType = {
     items: TaskType[]
-    "totalCount": 1,
-    "error": null
+    totalCount: number,
+    error: null | string
 }
 
-type TasksType = {
-    data: {
-        items: TaskType[]
-    }
-    messages: string[]
-    fieldsErrors: string[]
-    resultCode: 0
+export enum TaskStatuses {
+    New = 0,
+    InProgress = 1,
+    Completed = 2,
+    Draft = 3
+}
+
+export enum TaskPriorities {
+    Low = 0,
+    Middle = 1,
+    Hi = 2,
+    Urgently = 3,
+    Later = 4
 }

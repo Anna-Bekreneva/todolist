@@ -1,61 +1,29 @@
-import React, {ChangeEvent, useState} from 'react';
+import React from 'react';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {Task} from '../Task';
-import {TaskType} from '../TodoListWithRedux';
-import {action} from '@storybook/addon-actions';
+import App from '../App';
+import {ReduxStoreProviderDecorator} from '../state/ReduxStoreProviderDecorator';
+import {Task} from '../features/TodoList/Task';
+import {useSelector} from 'react-redux';
+import {AppRootStateType} from '../state/store';
+import {TaskType} from "../api/todolist-api";
+
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 
 export default {
-	title: 'TODOLIST/Task',
+	title: 'TODOLIST/TaskWithRedux',
 	component: Task,
-	// More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-
-	// Суда можно выносить общие свойства объектов args, которые нужны для всех сторис
-	args: {
-		changeTaskStatus: action('changeTaskStatus'),
-		changeTaskTitle: action('changeTaskTitle'),
-		removeTask: action('removeTask'),
-	}
-} as ComponentMeta<typeof Task>;
+	decorators: [ReduxStoreProviderDecorator]
+} as ComponentMeta<typeof App>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Task> = (args) => <Task {...args} />;
 
-export const TaskIsNotDoneStory = Template.bind({});
+const TaskCopy = () => {
+	const task = useSelector<AppRootStateType, TaskType>(state => state.tasks['todolistId1'][0]);
+	return <Task todolistId={'todolistId1'} task={task}/>;
+};
+
+const Template: ComponentStory<typeof Task> = (args) => <TaskCopy/>;
+
+export const TaskWithReduxStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-
-TaskIsNotDoneStory.args = {
-	task: {id: 'adsadada', title: 'JS', isDone: false},
-};
-
-export const TaskIsDoneStory = Template.bind({});
-
-TaskIsDoneStory.args = {
-  task: {id: 'adsadada', title: 'HTML', isDone: true},
-};
-
-const Template1: ComponentStory<typeof Task> = (args) => {
-
-	const [task, setTask] = useState({ id: 'aaa', title: 'js', isDone: false})
-
-	function changeTaskStatus (id: string, event: ChangeEvent<HTMLInputElement>) {
-		setTask({ id: 'aaa', title: 'js', isDone: !task.isDone})
-	}
-
-	function changeTaskTitle (id: string, newTitle: string) {
-		setTask({ id: 'aaa', title: newTitle, isDone: false})
-	}
-
-	function removeTask () {
-		action('removeTask')
-	}
-
-	return <Task
-		changeTaskStatus={changeTaskStatus}
-		changeTaskTitle={changeTaskTitle}
-		removeTask={args.removeTask}
-		task={task}/>
-};
-
-export const TaskStory = Template1.bind({});
