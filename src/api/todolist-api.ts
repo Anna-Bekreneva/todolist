@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {RequestStatusType} from "../state/app-reducer";
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.1/',
@@ -51,7 +52,7 @@ export type TodolistType = {
     order: number
 }
 
-type ResponseType<T = {}> = {
+export type ResponseType<T = {}> = {
     resultCode: number
     fieldsErrors: string[]
     messages: string[]
@@ -90,4 +91,14 @@ export enum TaskPriorities {
     Hi = 2,
     Urgently = 3,
     Later = 4
+}
+
+export enum ResultCode {
+    OK = 0,
+    ERROR = 1
+}
+
+export type ErrorsType = {
+    field: string,
+    message: string
 }

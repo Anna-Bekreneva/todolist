@@ -3,25 +3,41 @@ import './App.css';
 import {AddItemForm} from './components/AddItemForm';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from './state/store';
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@mui/material';
+import Typography from '@mui/material/Typography';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import Toolbar from '@mui/material/Toolbar';
 import {Menu} from '@mui/icons-material';
 import {addTodoListTC, setTodoListsTC} from './state/todolists-reducer';
 import TodoList from './features/TodoList/TodoList';
 import {TaskType, TodolistType} from "./api/todolist-api";
+import {LinearProgress} from "@mui/material";
+import {RequestStatusType} from "./state/app-reducer";
+import {ErrorSnackbar} from "./components/ErrorSnackbar";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
 export type TasksStateType = {
-    [key: string]: TaskType[]
+    [key: string]: TaskDomainType[]
+}
+
+export type TaskDomainType = TaskType & {
+    entityStatus: RequestStatusType
 }
 
 export type TodoListDomainType = TodolistType & {
     filter: FilterValuesType
+    entityStatus: RequestStatusType
 }
 
 function App () {
     console.log('App')
     const todolists = useSelector<AppRootStateType, Array<TodoListDomainType>>(state => state.todolists)
+    const lineProgressStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -35,7 +51,7 @@ function App () {
         return (
             <Grid key={tl.id} item>
                 <Paper style={{padding: "12px"}}>
-                    <TodoList title={tl.title} id={tl.id} filter={tl.filter}/>
+                    <TodoList title={tl.title} id={tl.id} filter={tl.filter} entityStatus={tl.entityStatus}/>
                 </Paper>
             </Grid>
         )
@@ -53,6 +69,7 @@ function App () {
                     </Typography>
                     <Button color="inherit" variant={'outlined'}>Login</Button>
                 </Toolbar>
+                {lineProgressStatus === 'loading' && <LinearProgress />}
             </AppBar>
             <Container style={{paddingTop: "20px"}} fixed>
                 <Grid container>
@@ -62,6 +79,7 @@ function App () {
                     {todoListComponents}
                 </Grid>
             </Container>
+            <ErrorSnackbar/>
         </div>
     );
 }

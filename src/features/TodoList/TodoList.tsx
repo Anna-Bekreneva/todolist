@@ -2,19 +2,22 @@ import React, {memo, useCallback, useEffect} from 'react';
 import {AddItemForm} from '../../components/AddItemForm';
 import {EditableSpan} from '../../components/EditableSpan';
 import {Button, List} from '@mui/material';
-import {DeleteForeverOutlined} from '@mui/icons-material';
+import {Delete} from '@mui/icons-material';
 import {useSelector} from 'react-redux';
 import {AppRootStateType, useAppDispatch} from '../../state/store';
 import {addTaskTC, setTasksTC} from '../../state/tasks-reducer';
 import {changeTodoListFilterAC, removeTodoListTC, updateTodoListTC} from '../../state/todolists-reducer';
 import {Task} from "./Task";
-import {TaskStatuses, TaskType} from "../../api/todolist-api";
-import {FilterValuesType} from "../../App";
+import {TaskStatuses} from "../../api/todolist-api";
+import {FilterValuesType, TaskDomainType} from "../../App";
+import {RequestStatusType} from "../../state/app-reducer";
+import IconButton from "@mui/material/IconButton";
 
 type TodoListPropsType = {
 	id: string
     title: string
     filter: FilterValuesType
+	entityStatus: RequestStatusType
 }
 
 const TodoList = memo((props: TodoListPropsType) => {
@@ -24,7 +27,7 @@ const TodoList = memo((props: TodoListPropsType) => {
 		dispatch(setTasksTC(props.id))
 	}, [])
 
-	const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.id])
+	const tasks = useSelector<AppRootStateType, Array<TaskDomainType>>(state => state.tasks[props.id])
 	let tasksFiltered = tasks
 
 	if (props.filter === 'active') {
@@ -35,7 +38,7 @@ const TodoList = memo((props: TodoListPropsType) => {
 		tasksFiltered = tasksFiltered.filter(task => task.status === TaskStatuses.Completed)
 	}
 
-	const getTasksListItem = (t: TaskType) => {
+	const getTasksListItem = (t: TaskDomainType) => {
 		return <Task key={t.id} todolistId={props.id} task={t}/>
 	}
 
@@ -53,10 +56,12 @@ const TodoList = memo((props: TodoListPropsType) => {
 	return (
 		<div>
             <h3>
-                <EditableSpan title={props.title} changeTitle={changeTodoListTitle}/>
-                <DeleteForeverOutlined onClick={removeTodoList}></DeleteForeverOutlined>
+                <EditableSpan title={props.title} changeTitle={changeTodoListTitle} disabled={props.entityStatus === 'loading'}/>
+				<IconButton onClick={removeTodoList} disabled={props.entityStatus === 'loading'}>
+					<Delete/>
+				</IconButton>
             </h3>
-            <AddItemForm addItem={addTask}></AddItemForm>
+            <AddItemForm addItem={addTask} isDisabled={props.entityStatus === 'loading'}></AddItemForm>
 			{tasksList}
 			<div>
 				<ButtonWithMemo title={'All'} variant={'contained'} onClick={onAllClickHandler} color={props.filter === 'all' ? 'secondary' : 'primary'}></ButtonWithMemo>
