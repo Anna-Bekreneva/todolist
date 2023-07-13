@@ -3,8 +3,7 @@ import {AddItemForm} from '../../components/AddItemForm';
 import {EditableSpan} from '../../components/EditableSpan';
 import {Button, List} from '@mui/material';
 import {Delete} from '@mui/icons-material';
-import {useSelector} from 'react-redux';
-import {AppRootStateType, useAppDispatch} from '../../state/store';
+import {useAppDispatch, useAppSelector} from '../../state/store';
 import {addTaskTC, setTasksTC} from '../../state/tasks-reducer';
 import {changeTodoListFilterAC, removeTodoListTC, updateTodoListTC} from '../../state/todolists-reducer';
 import {Task} from "./Task";
@@ -27,7 +26,7 @@ const TodoList = memo((props: TodoListPropsType) => {
 		dispatch(setTasksTC(props.id))
 	}, [])
 
-	const tasks = useSelector<AppRootStateType, Array<TaskDomainType>>(state => state.tasks[props.id])
+	const tasks = useAppSelector<Array<TaskDomainType>>(state => state.tasks[props.id])
 	let tasksFiltered = tasks
 
 	if (props.filter === 'active') {

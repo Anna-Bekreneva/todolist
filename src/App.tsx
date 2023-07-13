@@ -1,8 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {AddItemForm} from './components/AddItemForm';
-import {useSelector} from 'react-redux';
-import {AppRootStateType, useAppDispatch} from './state/store';
+import {useAppDispatch, useAppSelector} from './state/store';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -36,8 +35,8 @@ export type TodoListDomainType = TodolistType & {
 
 function App () {
     console.log('App')
-    const todolists = useSelector<AppRootStateType, Array<TodoListDomainType>>(state => state.todolists)
-    const lineProgressStatus = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const todolists = useAppSelector<Array<TodoListDomainType>>(state => state.todolists)
+    const lineProgressStatus = useAppSelector<RequestStatusType>(state => state.app.status)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
