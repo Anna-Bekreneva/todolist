@@ -1,10 +1,10 @@
-import {ErrorsType, ResultCode, todolistAPI, TodolistType} from "../api/todolist-api";
-import {FilterValuesType, TodoListDomainType} from "../App";
-import {AppThunk} from "./store";
-import {RequestStatusType, setStatusAC, SetStatusAT} from "./app-reducer";
-import {changeTasksEntityStatusAtTheTodoListAC, ChangeTasksEntityStatusAtTheTodoListAT} from "./tasks-reducer";
-import {handleServerAppError, handleServerNetworkError} from "../utils/utils-error";
+import {ErrorsType, ResultCode, todolistAPI, TodolistType} from "../../../api/todolist-api";
+import {FilterValuesType, TodoListDomainType} from "../../../app/App";
+import {AppThunk} from "../../../app/store";
+import {handleServerAppError, handleServerNetworkError} from "../../../utils/utils-error";
 import {AxiosError} from "axios"
+import {RequestStatusType, setStatusAC, SetStatusAT} from "../../../app/app-reducer";
+import {changeTasksEntityStatusAtTheTodoListAC, ChangeTasksEntityStatusAtTheTodoListAT} from "../Tasks/tasks-reducer";
 
 const initialState: Array<TodoListDomainType> = []
 

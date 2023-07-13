@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
-import './App.css';
-import {AddItemForm} from './components/AddItemForm';
-import {useAppDispatch, useAppSelector} from './state/store';
+import '../App.css';
+import {AddItemForm} from '../components/AddItemForm';
+import {useAppDispatch, useAppSelector} from './store';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -11,12 +11,12 @@ import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Toolbar from '@mui/material/Toolbar';
 import {Menu} from '@mui/icons-material';
-import {addTodoListTC, setTodoListsTC} from './state/todolists-reducer';
-import TodoList from './features/TodoList/TodoList';
-import {TaskType, TodolistType} from "./api/todolist-api";
 import {LinearProgress} from "@mui/material";
-import {RequestStatusType} from "./state/app-reducer";
-import {ErrorSnackbar} from "./components/ErrorSnackbar";
+import {RequestStatusType} from "./app-reducer";
+import {ErrorSnackbar} from "../components/ErrorSnackbar";
+import {TaskType, TodolistType} from "../api/todolist-api";
+import {addTodoListTC, setTodoListsTC} from "../features/TodolistLists/TodoLists/todolists-reducer";
+import TodoList from "../features/TodolistLists/TodoLists/TodoList";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
