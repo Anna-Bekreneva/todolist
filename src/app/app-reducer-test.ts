@@ -1,11 +1,12 @@
-import {appReducer, InitialAppStateType, setAppErrorAC, setStatusAC} from "./app-reducer";
+import {appReducer, InitialAppStateType, setAppErrorAC, setAppInitializedAC, setStatusAC} from "./app-reducer";
 
 let startState: InitialAppStateType
 
 beforeEach(() => {
     startState = {
         status: 'idle',
-        error: null
+        error: null,
+        isInitialized: false
     }
 })
 
@@ -21,4 +22,9 @@ test('app error should be change', () => {
 
     const endState = appReducer(startState, action)
     expect(endState.error).toBe('error')
+})
+
+test('app initialized should be change',() => {
+    const endState = appReducer(startState, setAppInitializedAC(true))
+    expect(endState.isInitialized).toBe(!endState.isInitialized)
 })

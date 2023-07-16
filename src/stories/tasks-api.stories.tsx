@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
-import {todolistAPI} from "../api/todolist-api";
+import {tasksAPI} from "../api/tasks-api";
 
 export default {
     title: 'API'
@@ -11,7 +11,7 @@ export const GetTasks = () => {
     const [id, setId] = useState('')
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => setId(event.currentTarget.value)
     const getTasks = () => {
-        todolistAPI.getTasks(id)
+        tasksAPI.getTasks(id)
             .then((res) => {
                 setState(res.data)
             })
@@ -21,7 +21,7 @@ export const GetTasks = () => {
 
     // useEffect(() => {
     //     const todolistId = '6adbc6c7-2a4c-4a6c-993a-f11935f033b0'
-    //     todolistAPI.getTasks(todolistId)
+    //     tasksAPI.getTasks(todolistId)
     //         .then((res) => {
     //             setState(res.data)
     //         })
@@ -47,7 +47,7 @@ export const CreateTask = () => {
     const onChangeHandlerTitle = (event: ChangeEvent<HTMLInputElement>) => setTitle(event.currentTarget.value)
 
     const createTask = () => {
-        todolistAPI.createTask(id, title)
+        tasksAPI.createTask(id, title)
             .then((res) => {
                 setState(res.data.data)
             })
@@ -58,7 +58,7 @@ export const CreateTask = () => {
     // useEffect(() => {
     //     const todolistId = '6adbc6c7-2a4c-4a6c-993a-f11935f033b0'
     //     const title = "TEST"
-    //     todolistAPI.createTask(todolistId, title)
+    //     tasksAPI.createTask(todolistId, title)
     //         .then((res) => {
     //             setState(res.data.data)
     //         })
@@ -85,7 +85,7 @@ export const DeleteTask = () => {
     const onChangeHandlerTaskId = (event: ChangeEvent<HTMLInputElement>) => setTaskId(event.currentTarget.value)
 
     const deleteTask = () => {
-        todolistAPI.deleteTask(todolistId, taskId)
+        tasksAPI.deleteTask(todolistId, taskId)
             .then((res) => {
                 setState(res.data)
             })
@@ -96,7 +96,7 @@ export const DeleteTask = () => {
     // useEffect(() => {
     //     const todoId = '6adbc6c7-2a4c-4a6c-993a-f11935f033b0'
     //     const taskId = 'dfe418ab-fc49-4760-8dce-6baace0efcde'
-    //     todolistAPI.deleteTask(todoId, taskId)
+    //     tasksAPI.deleteTask(todoId, taskId)
     //         .then((res) => {
     //             setState(res.data)
     //         })
@@ -126,7 +126,7 @@ export const UpdateTaskTitle = () => {
     const onChangeHandlerTaskId = (event: ChangeEvent<HTMLInputElement>) => setTaskId(event.currentTarget.value)
 
     const updateTask = () => {
-        todolistAPI.updateTask(todolistId, taskId, {
+        tasksAPI.updateTask(todolistId, taskId, {
             status: 1,
             deadline: '',
             priority: 1,
@@ -147,7 +147,7 @@ export const UpdateTaskTitle = () => {
     //     const todoId = '6adbc6c7-2a4c-4a6c-993a-f11935f033b0'
     //     const taskId = 'dfe418ab-fc49-4760-8dce-6baace0efcde'
     //     const title = 'REDUX'
-    //     todolistAPI.updateTask(todoId, taskId, title)
+    //     tasksAPI.updateTask(todoId, taskId, title)
     //         .then((res) => {
     //             setState(res.data)
     //         })

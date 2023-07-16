@@ -1,6 +1,6 @@
 import {setAppErrorAC, SetErrorAT, setStatusAC, SetStatusAT} from "../app/app-reducer";
 import {Dispatch} from "redux";
-import {ResponseType} from "../api/todolist-api";
+import {ResponseType} from "../api/instance";
 
 export const handleServerNetworkError = (dispatch: Dispatch<ErrorUtilsDispatchType>, errorMessage: string) => {
     dispatch(setAppErrorAC(errorMessage))

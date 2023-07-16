@@ -1,4 +1,5 @@
-import {ErrorsType, ResultCode, todolistAPI, TodolistType} from "../../../api/todolist-api";
+import {todolistAPI, TodolistType} from "../../../api/todolist-api";
+import {ErrorsType, ResultCode} from "../../../api/instance";
 import {FilterValuesType, TodoListDomainType} from "../../../app/App";
 import {AppThunk} from "../../../app/store";
 import {handleServerAppError, handleServerNetworkError} from "../../../utils/utils-error";
