@@ -15,23 +15,8 @@ import {TodolistType} from "../api/todolist-api";
 import {TaskType} from "../api/tasks-api";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
-import {TodoLists} from "../features/TodolistLists/TodoLists/TodoLists";
 import {logoutTC} from "../features/Login/auth-reducer";
-
-export type FilterValuesType = 'all' | 'active' | 'completed'
-
-export type TasksStateType = {
-    [key: string]: TaskDomainType[]
-}
-
-export type TaskDomainType = TaskType & {
-    entityStatus: RequestStatusType
-}
-
-export type TodoListDomainType = TodolistType & {
-    filter: FilterValuesType
-    entityStatus: RequestStatusType
-}
+import {TodoLists} from "../features/TodoLists/TodoLists";
 
 function App () {
     console.log('App')
@@ -81,3 +66,18 @@ function App () {
 }
 
 export default App;
+
+export type FilterValuesType = 'all' | 'active' | 'completed'
+
+export type TasksStateType = {
+    [key: string]: TaskDomainType[]
+}
+
+export type TaskDomainType = TaskType & {
+    entityStatus: RequestStatusType
+}
+
+export type TodoListDomainType = TodolistType & {
+    filter: FilterValuesType
+    entityStatus: RequestStatusType
+}
