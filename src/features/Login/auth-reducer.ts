@@ -5,6 +5,7 @@ import {setAppInitializedAC, setStatusAC} from "../../app/app-reducer";
 import {ErrorsType, ResultCode} from "../../api/instance";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/utils-error";
 import {AxiosError} from "axios"
+import {clearTodolistsAC} from "../TodoLists/todolists-reducer";
 
 const initialStateAuth = {
     isLoggedIn: false
@@ -45,7 +46,8 @@ export const logoutTC = (): AppThunk => (dispatch) => {
             if (res.data.resultCode === ResultCode.OK) {
                 dispatch(setStatusAC('succeeded'))
                 dispatch(setIsLoggedInAC(false))
-                dispatch(setAppInitializedAC(false))
+                dispatch(setAppInitializedAC(true))
+                dispatch(clearTodolistsAC())
             } else {
                 handleServerAppError(dispatch, res.data)
             }
