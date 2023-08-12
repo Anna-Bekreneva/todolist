@@ -1,23 +1,19 @@
 import Grid from "@mui/material/Grid";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
-import React, {useEffect} from "react";
+import React, {memo, useEffect} from "react";
 import {setTodoListsTC} from "./todolists-reducer";
 import Paper from "@mui/material/Paper";
 import TodoList from "./Todolist/TodoList";
 import {Navigate} from "react-router-dom";
 import {useTodoLists} from "./hook/useTodoLists";
 
-export const TodoLists = () => {
-
+export const TodoLists = memo(() => {
     const {todolists, isLoggedIn, dispatch, addTodoList} = useTodoLists()
 
     useEffect(() => {
+        if (!isLoggedIn) return
         dispatch(setTodoListsTC())
     }, [])
-
-    if (!isLoggedIn) {
-        return <Navigate to={'/login'}></Navigate>
-    }
 
     const todoListComponents = todolists.map(tl => {
         return (
@@ -29,6 +25,10 @@ export const TodoLists = () => {
         )
     });
 
+    if (!isLoggedIn) {
+        return <Navigate to={'/login'}></Navigate>
+    }
+
     return (
         <>
             <Grid container>
@@ -39,4 +39,4 @@ export const TodoLists = () => {
             </Grid>
         </>
     )
-}
+})

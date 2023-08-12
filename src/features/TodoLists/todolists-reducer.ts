@@ -75,6 +75,9 @@ export const setTodoListsTC = (): AppThunk => (dispatch) => {
                 dispatch(setTasksTC(todolist.id))
             })
         })
+        .catch(() => {
+            dispatch(setStatusAC('failed'))
+        })
 }
 
 export const removeTodoListTC = (id: string): AppThunk => (dispatch) => {
