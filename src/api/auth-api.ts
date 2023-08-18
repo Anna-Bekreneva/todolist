@@ -1,5 +1,5 @@
 import {instance, ResponseType} from "./instance";
-import {LoginValuesType} from "../features/Login/Login";
+import {LoginValuesType} from "features/Login/Login";
 
 export const authAPI = {
     login(data: LoginValuesType) {

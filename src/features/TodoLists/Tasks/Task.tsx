@@ -1,9 +1,9 @@
 import React, {memo} from 'react';
 import {Checkbox, ListItem} from '@mui/material';
-import {EditableSpan} from '../../../components/EditableSpan/EditableSpan';
+import {EditableSpan} from 'components/EditableSpan/EditableSpan';
 import {Delete} from '@mui/icons-material';
-import {TaskStatuses} from "../../../api/tasks-api";
-import {TaskDomainType} from "../../../app/App";
+import {TaskStatuses} from "api/tasks-api";
+import {TaskDomainType} from "app/App";
 import IconButton from "@mui/material/IconButton";
 import {useTask} from "./hook/useTask";
 

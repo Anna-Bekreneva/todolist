@@ -10,13 +10,13 @@ import Toolbar from '@mui/material/Toolbar';
 import {Menu} from '@mui/icons-material';
 import {CircularProgress, LinearProgress} from "@mui/material";
 import {RequestStatusType, setAppInitializedTC} from "./app-reducer";
-import {ErrorSnackbar} from "../components/ErrorSnackbar";
-import {TodolistType} from "../api/todolist-api";
-import {TaskType} from "../api/tasks-api";
+import {ErrorSnackbar} from "components/ErrorSnackbar";
+import {TodolistType} from "api/todolist-api";
+import {TaskType} from "api/tasks-api";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {Login} from "../features/Login/Login";
-import {logoutTC} from "../features/Login/auth-reducer";
-import {TodoLists} from "../features/TodoLists/TodoLists";
+import {Login} from "features/Login/Login";
+import {logoutTC} from "features/Login/auth-reducer";
+import {TodoLists} from "features/TodoLists/TodoLists";
 
 function App () {
     console.log('App')

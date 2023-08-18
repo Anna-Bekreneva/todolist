@@ -1,9 +1,9 @@
-import {useAppDispatch, useAppSelector} from "../../../../app/store";
-import {FilterValuesType, TaskDomainType} from "../../../../app/App";
-import {TaskStatuses} from "../../../../api/tasks-api";
+import {useAppDispatch, useAppSelector} from "app/store";
+import {FilterValuesType, TaskDomainType} from "app/App";
+import {TaskStatuses} from "api/tasks-api";
 import {useCallback} from "react";
 import {addTaskTC} from "../../Tasks/tasks-reducer";
-import {changeTodoListFilterAC, removeTodoListTC, updateTodoListTC} from "../../todolists-reducer";
+import {todolistsActions, updateTodoListTC} from "features/TodoLists/todolists-reducer";
 
 export const useTodoList = (filter: FilterValuesType, id: string) => {
     const dispatch = useAppDispatch()
@@ -21,12 +21,15 @@ export const useTodoList = (filter: FilterValuesType, id: string) => {
 
     const addTask = useCallback((title: string) => dispatch(addTaskTC(id, title)), [dispatch, id]);
 
-    const onAllClickHandler = useCallback(() => dispatch(changeTodoListFilterAC('all', id)), [dispatch, id])
-    const onActiveClickHandler = useCallback(() => dispatch(changeTodoListFilterAC('active', id)), [dispatch, id])
-    const onCompletedClickHandler = useCallback(() => dispatch(changeTodoListFilterAC('completed', id)), [dispatch, id])
+    const onAllClickHandler = useCallback(() =>
+        dispatch(todolistsActions.changeTodoListFilter({filter: 'all', id})), [dispatch, id])
+    const onActiveClickHandler = useCallback(() =>
+        dispatch(todolistsActions.changeTodoListFilter({filter: 'active', id})), [dispatch, id])
+    const onCompletedClickHandler = useCallback(() =>
+        dispatch(todolistsActions.changeTodoListFilter({filter: 'completed', id})), [dispatch, id])
 
     const changeTodoListTitle = useCallback((title: string) => dispatch(updateTodoListTC(id, title)), [dispatch, id])
-    const removeTodoList = () => dispatch(removeTodoListTC(id));
+    const removeTodoList = () => dispatch(todolistsActions.removeTodoList({id}));
 
     return {tasks, tasksFiltered, dispatch, changeTodoListTitle, removeTodoList, addTask, onAllClickHandler, onActiveClickHandler, onCompletedClickHandler}
 }

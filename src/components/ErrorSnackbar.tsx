@@ -1,7 +1,7 @@
 import React from "react";
 import {Alert, Snackbar} from "@mui/material";
-import {useAppDispatch, useAppSelector} from "../app/store";
-import {ErrorStatusType, setAppErrorAC} from "../app/app-reducer";
+import {useAppDispatch, useAppSelector} from "app/store";
+import {appActions, ErrorStatusType} from "app/app-reducer";
 
 export const ErrorSnackbar = () => {
     const error = useAppSelector<ErrorStatusType>(state => state.app.error)
@@ -10,7 +10,7 @@ export const ErrorSnackbar = () => {
         if (reason === 'clickaway') {
             return;
         }
-        dispatch(setAppErrorAC(''))
+        dispatch(appActions.setAppError({error: ''}))
     };
 
     return (

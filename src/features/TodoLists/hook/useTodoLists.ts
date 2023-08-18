@@ -1,5 +1,5 @@
-import {useAppDispatch, useAppSelector} from "../../../app/store";
-import {TodoListDomainType} from "../../../app/App";
+import {useAppDispatch, useAppSelector} from "app/store";
+import {TodoListDomainType} from "app/App";
 import {useCallback} from "react";
 import {addTodoListTC} from "../todolists-reducer";
 

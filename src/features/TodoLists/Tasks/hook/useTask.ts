@@ -1,8 +1,8 @@
-import {useAppDispatch} from "../../../../app/store";
+import {useAppDispatch} from "app/store";
 import {changeTaskStatusTC, changeTaskTitleTC, removeTaskTC} from "../tasks-reducer";
 import {ChangeEvent, useCallback} from "react";
-import {TaskStatuses} from "../../../../api/tasks-api";
-import {TaskDomainType} from "../../../../app/App";
+import {TaskStatuses} from "api/tasks-api";
+import {TaskDomainType} from "app/App";
 
 export const useTask = (task: TaskDomainType, todolistId: string) => {
     const {id, status, title, entityStatus} = task

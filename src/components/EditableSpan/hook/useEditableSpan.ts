@@ -1,24 +1,24 @@
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useState, KeyboardEvent} from "react";
 
 export const useEditableSpan = (title: string, disabled: boolean, changeTitle: (newTitle: string) => void) => {
-    const [isEditMode, setIsEditMode] = useState<boolean>(false)
-    const [value, setTitle] = useState<string>(title)
+    const [isEditMode, setIsEditMode] = useState(false)
+    const [value, setTitle] = useState(title)
 
     const onEditMode = () => {
-        if (disabled) {
-            return
-        }
+        if (disabled) return
         setIsEditMode(true)
     }
 
     const offEditMode = () => {
+        value.trim() ? changeTitle(value) : setTitle(title)
         setIsEditMode(false)
-        changeTitle(value)
     }
 
-    const onChangeSetTitle = (e: ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.currentTarget.value);
-    }
+    const onChangeSetTitle = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value);
 
-    return {isEditMode, value, onChangeSetTitle, onEditMode, offEditMode}
+
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => event.key === 'Enter' && offEditMode()
+
+
+    return {isEditMode, value, onChangeSetTitle, onEditMode, offEditMode, onKeyPressHandler}
 }

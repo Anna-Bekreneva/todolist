@@ -1,11 +1,11 @@
 import React, {memo} from 'react';
-import {AddItemForm} from '../../../components/AddItemForm/AddItemForm';
-import {EditableSpan} from '../../../components/EditableSpan/EditableSpan';
+import {AddItemForm} from 'components/AddItemForm/AddItemForm';
+import {EditableSpan} from 'components/EditableSpan/EditableSpan';
 import {Button, List} from '@mui/material';
 import {Delete} from '@mui/icons-material';
 import {Task} from "../Tasks/Task";
-import {FilterValuesType, TaskDomainType} from "../../../app/App";
-import {RequestStatusType} from "../../../app/app-reducer";
+import {FilterValuesType, TaskDomainType} from "app/App";
+import {RequestStatusType} from "app/app-reducer";
 import IconButton from "@mui/material/IconButton";
 import {useTodoList} from "./hook/useTodoList";
 

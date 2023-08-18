@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
-import {tasksAPI} from "../api/tasks-api";
+import {tasksAPI} from "api/tasks-api";
 
 export default {
     title: 'API'

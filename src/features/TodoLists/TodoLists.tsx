@@ -1,5 +1,5 @@
 import Grid from "@mui/material/Grid";
-import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
+import {AddItemForm} from "components/AddItemForm/AddItemForm";
 import React, {memo, useEffect} from "react";
 import {setTodoListsTC} from "./todolists-reducer";
 import Paper from "@mui/material/Paper";
