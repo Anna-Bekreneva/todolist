@@ -17,12 +17,14 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "features/Login/Login";
 import {logoutTC} from "features/Login/auth-reducer";
 import {TodoLists} from "features/TodoLists/TodoLists";
+import {selectAppIsInitialized, selectAppStatus} from "app/app-selectors";
+import {selectIsLoggedIn} from "features/Login/auth-selectors";
 
 function App () {
     console.log('App')
-    const lineProgressStatus = useAppSelector<RequestStatusType>(state => state.app.status)
-    const isInitialized = useAppSelector(state => state.app.isInitialized)
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const lineProgressStatus = useAppSelector<RequestStatusType>(selectAppStatus)
+    const isInitialized = useAppSelector<boolean>(selectAppIsInitialized)
+    const isLoggedIn = useAppSelector<boolean>(selectIsLoggedIn)
     const dispatch = useAppDispatch()
 
     useEffect(() => {

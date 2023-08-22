@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 import {setIsLoggedInTC} from "./auth-reducer";
 import {useAppDispatch, useAppSelector} from "app/store";
 import {Navigate} from "react-router-dom";
+import {selectIsLoggedIn} from "features/Login/auth-selectors";
 
 export type LoginValuesType = {
     email: string,
@@ -22,7 +23,7 @@ export type LoginValuesType = {
 export const Login = () => {
 
     const dispatch = useAppDispatch()
-    const isLoggedIn = useAppSelector(state => state.auth.isLoggedIn)
+    const isLoggedIn = useAppSelector<boolean>(selectIsLoggedIn)
 
     const formik = useFormik({
         initialValues: {
