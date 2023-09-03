@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
-import {tasksAPI} from "api/tasks-api";
+import {tasksAPI} from "features/todoLists/api/tasks-api";
 
 export default {
     title: 'API'
@@ -79,7 +79,7 @@ export const DeleteTask = () => {
     const [state, setState] = useState<any>(null)
 
     const [todolistId, setTodolistiId] = useState('')
-    const onChangeHandlerTodolistId = (event: ChangeEvent<HTMLInputElement>) => setTodolistiId(event.currentTarget.value)
+    const onChangeHandlertodolistId = (event: ChangeEvent<HTMLInputElement>) => setTodolistiId(event.currentTarget.value)
 
     const [taskId, setTaskId] = useState('')
     const onChangeHandlerTaskId = (event: ChangeEvent<HTMLInputElement>) => setTaskId(event.currentTarget.value)
@@ -105,7 +105,7 @@ export const DeleteTask = () => {
     return (
         <div>
             <div>
-                <input placeholder={"todolist id"} type="text" value={todolistId} onChange={onChangeHandlerTodolistId}/>
+                <input placeholder={"todolist id"} type="text" value={todolistId} onChange={onChangeHandlertodolistId}/>
                 <input placeholder={"task id"} type="text" value={taskId} onChange={onChangeHandlerTaskId}/>
                 <button onClick={deleteTask} type="button">delete task</button>
             </div>
@@ -120,7 +120,7 @@ export const UpdateTaskTitle = () => {
     const onChangeHandlerTitle = (event: ChangeEvent<HTMLInputElement>) => setTitle(event.currentTarget.value)
 
     const [todolistId, setTodolistiId] = useState('')
-    const onChangeHandlerTodolistId = (event: ChangeEvent<HTMLInputElement>) => setTodolistiId(event.currentTarget.value)
+    const onChangeHandlertodolistId = (event: ChangeEvent<HTMLInputElement>) => setTodolistiId(event.currentTarget.value)
 
     const [taskId, setTaskId] = useState('')
     const onChangeHandlerTaskId = (event: ChangeEvent<HTMLInputElement>) => setTaskId(event.currentTarget.value)
@@ -156,7 +156,7 @@ export const UpdateTaskTitle = () => {
     return (
         <div>
             <div>
-                <input placeholder={"todolist id"} type="text" value={todolistId} onChange={onChangeHandlerTodolistId}/>
+                <input placeholder={"todolist id"} type="text" value={todolistId} onChange={onChangeHandlertodolistId}/>
                 <input placeholder={"task id"} type="text" value={taskId} onChange={onChangeHandlerTaskId}/>
                 <input placeholder={"title"} type="text" value={title} onChange={onChangeHandlerTitle}/>
                 <button onClick={updateTask} type="button">update task</button>

@@ -1,9 +1,9 @@
 import {AppThunk} from "./store";
-import {authAPI} from "api/auth-api";
-import {ErrorsType, ResultCode} from "api/instance";
+import {authAPI} from "features/auth/api/auth-api";
+import {ErrorsType, ResultCode} from "common/api/api";
 import {AxiosError} from "axios"
-import {handleServerAppError, handleServerNetworkError} from "utils/utils-error";
-import {authActions} from "features/Login/auth-reducer";
+import {handleServerAppError, handleServerNetworkError} from "common/utils";
+import {authActions} from "features/auth/model/auth-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -35,13 +35,14 @@ export const setAppInitializedTC = (): AppThunk => (dispatch) => {
     dispatch(appActions.setStatus({status: 'loading'}));
     authAPI.me()
         .then((res) => {
-            if (res.data.resultCode === ResultCode.OK) {
+            if (res.data.resultCode === ResultCode.success) {
                 dispatch(appActions.setStatus({status: 'succeeded'}));
                 dispatch(authActions.setIsLoggedIn({isLoggedIn: true}))
             } else {
                 handleServerAppError(dispatch, res.data)
                 dispatch(appActions.setStatus({status: 'failed'}));
             }
+            //dispatch(appActions.setAppInitialized({isInitialized: true})); ??
         })
         .catch((e: AxiosError<ErrorsType>) => {
             const error = e.response ? e.response?.data.message : e.message

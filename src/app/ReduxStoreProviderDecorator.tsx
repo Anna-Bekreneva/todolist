@@ -1,12 +1,12 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import {combineReducers, legacy_createStore} from 'redux';
-import {TaskStatuses} from "api/tasks-api";
 import {appReducer} from "./app-reducer";
 import {AppRootStateType} from "./store";
-import {authReducer} from "features/Login/auth-reducer";
-import {tasksReducer} from "features/TodoLists/Tasks/tasks-reducer";
-import {todolistsReducer} from "features/TodoLists/todolists-reducer";
+import {authReducer} from "features/auth/model/auth-reducer";
+import {tasksReducer} from "features/todoLists/model/tasks-reducer";
+import {todolistsReducer} from "features/todoLists/model/todolists-reducer";
+import {TaskStatuses} from "common/enums/enums";
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
@@ -23,12 +23,12 @@ const initialGlobalState = {
 
     tasks: {
         'todolistId1' : [
-            {id: '1', title: 'HTML', deadline: '', order: 0, addedDate: '', startDate: '', status: TaskStatuses.Completed, description: '', todoListId: '', priority: 1, entityStatus: 'idle'},
-            {id: '2', title: 'JS', deadline: '', order: 0, addedDate: '', startDate: '', status: TaskStatuses.New, description: '', todoListId: '', priority: 1, entityStatus: 'idle'},
+            {id: '1', title: 'HTML', deadline: '', order: 0, addedDate: '', startDate: '', status: TaskStatuses.completed, description: '', todolistId: '', priority: 1, entityStatus: 'idle'},
+            {id: '2', title: 'JS', deadline: '', order: 0, addedDate: '', startDate: '', status: TaskStatuses.new, description: '', todolistId: '', priority: 1, entityStatus: 'idle'},
         ],
         'todolistId2' : [
-            {id: '1', title: 'Milk', deadline: '', order: 0, addedDate: '', startDate: '', status: TaskStatuses.New, description: '', todoListId: '', priority: 1, entityStatus: 'idle'},
-            {id: '2', title: 'React Book', deadline: '', order: 0, addedDate: '', startDate: '', status: TaskStatuses.Completed, description: '', todoListId: '', priority: 1, entityStatus: 'idle'},
+            {id: '1', title: 'Milk', deadline: '', order: 0, addedDate: '', startDate: '', status: TaskStatuses.new, description: '', todolistId: '', priority: 1, entityStatus: 'idle'},
+            {id: '2', title: 'React Book', deadline: '', order: 0, addedDate: '', startDate: '', status: TaskStatuses.completed, description: '', todolistId: '', priority: 1, entityStatus: 'idle'},
         ],
     },
 

@@ -3,8 +3,8 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import App, {TasksStateType} from '../app/App';
 import {ReduxStoreProviderDecorator} from 'app/ReduxStoreProviderDecorator';
 import {useAppSelector} from 'app/store';
-import {Task} from "features/TodoLists/Tasks/Task";
-import {selectorTasks} from "features/TodoLists/Tasks/tasks-selectors";
+import {Task} from "features/todoLists/ui/Tasks/Task";
+import {selectorTasks} from "features/todoLists/model/tasks-selectors";
 
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

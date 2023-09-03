@@ -2,15 +2,15 @@ import {AnyAction, combineReducers} from 'redux';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import {appReducer} from "./app-reducer";
-import {authReducer} from "features/Login/auth-reducer";
-import {tasksReducer} from "features/TodoLists/Tasks/tasks-reducer";
-import {todolistsReducer} from "features/TodoLists/todolists-reducer";
+import {authReducer} from "features/auth/model/auth-reducer";
+import {tasksReducer} from "features/todoLists/model/tasks-reducer";
+import {todolistsReducer} from "features/todoLists/model/todolists-reducer";
 import {configureStore} from "@reduxjs/toolkit";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 
-type AppDispatchType = ThunkDispatch<AppRootStateType, unknown, AnyAction>
+export type AppDispatchType = ThunkDispatch<AppRootStateType, unknown, AnyAction>
 export const useAppDispatch = () => useDispatch<AppDispatchType>()
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 
