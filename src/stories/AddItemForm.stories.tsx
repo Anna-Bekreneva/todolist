@@ -13,7 +13,7 @@ export default {
   component: AddItemForm,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    addItem: {
+    callback: {
       description: 'Button clicked inside form'
     }
   },
@@ -26,7 +26,7 @@ export const AddItemFormStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 AddItemFormStory.args = {
-  addItem: action('Button clicked inside form')
+  callback: action('Button clicked inside form')
 }
 
 const Template1: ComponentStory<typeof AddItemForm> = (args) => {
@@ -44,7 +44,7 @@ const Template1: ComponentStory<typeof AddItemForm> = (args) => {
     const trimmedTitle = title.trim();
 
     if (trimmedTitle) {
-      args.addItem(trimmedTitle);
+      args.callback(trimmedTitle);
     } else {
       setError(true);
     }

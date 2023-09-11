@@ -1,9 +1,9 @@
-import {useAppDispatch, useAppSelector} from "app/store";
 import {TodoListDomainType} from "app/App";
 import {useCallback} from "react";
 import {selectIsLoggedIn} from "features/auth/model/auth-selectors";
 import {selectTodolists} from "features/todoLists/model/todolists-selectors";
 import {todolistsThunks} from "features/todoLists/model/todolists-reducer";
+import {useAppDispatch, useAppSelector} from "common/hooks";
 
 export const useTodoLists = () => {
     const todolists = useAppSelector<Array<TodoListDomainType>>(selectTodolists)

@@ -32,7 +32,7 @@ export const TodoLists = memo(() => {
     return (
         <>
             <Grid container>
-                <AddItemForm addItem={addTodoList}></AddItemForm>
+                <AddItemForm callback={addTodoList}></AddItemForm>
             </Grid>
             <Grid spacing={4} container>
                 {todoListComponents}

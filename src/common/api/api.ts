@@ -8,11 +8,16 @@ export const api = axios.create({
     },
 })
 
-export type ResponseType<T = {}> = {
+export type BaseResponseType<D = {}> = {
     resultCode: number
-    fieldsErrors: string[]
     messages: string[]
-    data: T
+    data: D
+    fieldsErrors: ErrorsType[]
+}
+
+export type ErrorsType = {
+    error: string
+    field: string
 }
 
 export const ResultCode = {
@@ -20,8 +25,3 @@ export const ResultCode = {
     error: 1,
     captcha: 10
 } as const
-
-export type ErrorsType = {
-    field: string,
-    message: string
-}

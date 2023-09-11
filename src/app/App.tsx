@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import '../App.css';
-import {useAppDispatch, useAppSelector} from './store';
 import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
@@ -9,16 +8,17 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import {Menu} from '@mui/icons-material';
 import {CircularProgress, LinearProgress} from "@mui/material";
-import {RequestStatusType, setAppInitializedTC} from "./app-reducer";
+import {appThunks, RequestStatusType} from "./app-reducer";
 import {ErrorSnackbar} from "common/components/ErrorSnackbar/ErrorSnackbar";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {Login} from "features/auth/model/Login";
-import {logoutTC} from "features/auth/model/auth-reducer";
 import {TodoLists} from "features/todoLists/ui/TodoLists";
 import {selectAppIsInitialized, selectAppStatus} from "app/app-selectors";
 import {selectIsLoggedIn} from "features/auth/model/auth-selectors";
 import {TaskType} from "features/todoLists/api/tasksTypesApi";
 import {TodolistType} from "features/todoLists/api/todolistsTypesApi";
+import {authThunks} from "features/auth/model/auth-reducer";
+import {useAppDispatch, useAppSelector} from "common/hooks";
 
 function App () {
     console.log('App')
@@ -28,7 +28,7 @@ function App () {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(setAppInitializedTC())
+        dispatch(appThunks.setAppInitialized())
     }, [])
 
     if (!isInitialized) {
@@ -38,7 +38,7 @@ function App () {
         </div>
     }
 
-    const logout = () => dispatch(logoutTC())
+    const logout = () => dispatch(authThunks.logout())
 
     return (
         <div className="App">

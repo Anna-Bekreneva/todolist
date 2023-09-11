@@ -1,8 +1,8 @@
-import {useAppDispatch} from "app/store";
 import {ChangeEvent, useCallback} from "react";
 import {TaskDomainType} from "app/App";
 import {tasksThunks} from "features/todoLists/model/tasks-reducer";
 import {TaskStatuses} from "common/enums/enums";
+import {useAppDispatch} from "common/hooks";
 
 export const useTask = (task: TaskDomainType, todolistId: string) => {
     const {id, status, title, entityStatus} = task

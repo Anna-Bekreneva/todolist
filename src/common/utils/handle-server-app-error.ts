@@ -1,12 +1,10 @@
 import {Dispatch} from "redux";
-import {ResponseType} from "common/api/api";
+import {BaseResponseType} from "common/api/api";
 import {appActions} from "app/app-reducer";
 
-export const handleServerAppError = <T>(dispatch: Dispatch, data: ResponseType<T>) => {
-    if (data.messages.length && typeof data.messages[0] === 'string' && data.messages[0].trim()) {
-        dispatch(appActions.setAppError({error: data.messages[0]}))
-    } else {
-        dispatch(appActions.setAppError({error: 'Some error occurred'}))
+export const handleServerAppError = <T>(dispatch: Dispatch, data: BaseResponseType<T>, showError: boolean = true) => {
+    if (showError) {
+        dispatch(appActions.setAppError({error: data.messages.length ? data.messages[0] : 'Some error occurred'}))
     }
-    dispatch(appActions.setStatus({status: 'failed'}))
+    dispatch(appActions.setAppStatus({status: 'failed'}))
 }

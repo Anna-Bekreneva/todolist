@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useEffect} from 'react';
 import {Button, List} from '@mui/material';
 import {Delete} from '@mui/icons-material';
 import {Task} from "features/todoLists/ui/Tasks/Task";
@@ -7,11 +7,18 @@ import {RequestStatusType} from "app/app-reducer";
 import IconButton from "@mui/material/IconButton";
 import {useTodoList} from "features/todoLists/ui/Todolist/hook/useTodoList";
 import {AddItemForm, EditableSpan} from "common/components";
+import {tasksThunks} from "features/todoLists/model/tasks-reducer";
+import {useAppDispatch} from "common/hooks";
 
 const TodoList = memo((props: TodoListPropsType) => {
+	const dispatch = useAppDispatch()
 
 	const {tasks, tasksFiltered, changeTodoListTitle, removeTodoList, addTask, onAllClickHandler, onActiveClickHandler, onCompletedClickHandler}
 		= useTodoList(props.filter, props.id)
+
+	useEffect(() => {
+		dispatch(tasksThunks.setTasks({todolistId: props.id}))
+	}, [])
 
 	const getTasksListItem = (t: TaskDomainType) => {
 		return <Task key={t.id} todolistId={props.id} task={t}/>
@@ -27,7 +34,7 @@ const TodoList = memo((props: TodoListPropsType) => {
 					<Delete/>
 				</IconButton>
             </h3>
-            <AddItemForm addItem={addTask} isDisabled={props.entityStatus === 'loading'}></AddItemForm>
+            <AddItemForm callback={addTask} isDisabled={props.entityStatus === 'loading'}></AddItemForm>
 			{tasksList}
 			<div>
 				<ButtonWithMemo title={'All'} variant={'contained'} onClick={onAllClickHandler} color={props.filter === 'all' ? 'secondary' : 'primary'}></ButtonWithMemo>

@@ -1,16 +1,18 @@
-import {useAppDispatch, useAppSelector} from "app/store";
+
 import {FilterValuesType, TasksStateType} from "app/App";
 import {useCallback} from "react";
 import {todolistsActions, todolistsThunks} from "features/todoLists/model/todolists-reducer";
 import {selectorTasks} from "features/todoLists/model/tasks-selectors";
 import {tasksThunks} from "features/todoLists/model/tasks-reducer";
 import {TaskStatuses} from "common/enums/enums";
+import {useAppDispatch, useAppSelector} from "common/hooks";
 
 export const useTodoList = (filter: FilterValuesType, id: string) => {
     const dispatch = useAppDispatch()
 
     const allTasks = useAppSelector<TasksStateType>(selectorTasks)
     const tasks = allTasks[id]
+    console.log(tasks)
     let tasksFiltered = tasks
 
     if (filter === 'active') {

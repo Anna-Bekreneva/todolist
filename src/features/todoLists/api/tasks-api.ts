@@ -1,4 +1,4 @@
-import {api, ResponseType} from "common/api/api";
+import {api, BaseResponseType} from "common/api/api";
 import {GetTasksType, TaskType, UpdateTaskModelType} from "features/todoLists/api/tasksTypesApi";
 
 export const tasksAPI = {
@@ -6,12 +6,12 @@ export const tasksAPI = {
         return api.get<GetTasksType>(`todo-lists/${todolistId}/tasks`)
     },
     createTask(todolistId: string, title: string) {
-        return api.post<ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title})
+        return api.post<BaseResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title})
     },
     updateTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
-        return api.put<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
+        return api.put<BaseResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     },
     deleteTask(todolistId: string, taskId: string) {
-        return api.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+        return api.delete<BaseResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
 }

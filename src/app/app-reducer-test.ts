@@ -11,7 +11,7 @@ beforeEach(() => {
 })
 
 test('app status should be change', () => {
-    const action = appActions.setStatus({status: 'idle'})
+    const action = appActions.setAppStatus({status: 'idle'})
 
     const endState = appReducer(startState, action)
     expect(endState.status).toBe('idle')

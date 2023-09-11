@@ -7,12 +7,13 @@ import FormGroup from '@mui/material/FormGroup';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import {useFormik} from "formik";
+import {FormikHelpers, useFormik} from "formik";
 import * as Yup from 'yup';
-import {setIsLoggedInTC} from "features/auth/model/auth-reducer";
-import {useAppDispatch, useAppSelector} from "app/store";
 import {Navigate} from "react-router-dom";
 import {selectIsLoggedIn} from "features/auth/model/auth-selectors";
+import {authThunks} from "features/auth/model/auth-reducer";
+import {useAppDispatch, useAppSelector} from "common/hooks";
+import {BaseResponseType} from "common/api/api";
 
 export type LoginValuesType = {
     email: string,
@@ -37,9 +38,16 @@ export const Login = () => {
             password: Yup.string().min(3).required('Required'),
         }),
 
-        onSubmit: values => {
-            dispatch(setIsLoggedInTC(values))
-            formik.resetForm()
+        onSubmit: (values, formikHelpers: FormikHelpers<LoginValuesType>) => {
+            dispatch(authThunks.setIsLoggedIn({data: values}))
+                .unwrap()
+                .catch((res: BaseResponseType | null) => {
+                    if (res && res.fieldsErrors?.length) {
+                        res.fieldsErrors.forEach((field) => {
+                            formikHelpers.setFieldError(field.field, field.error)
+                        })
+                    }
+                })
         },
     });
 
@@ -52,8 +60,8 @@ export const Login = () => {
             <FormControl>
                 <FormLabel>
                     <p>To log in get registered
-                        <a href={'https://social-network.samuraijs.com/'}
-                           target={'_blank'}> here
+                        <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>
+                            here
                         </a>
                     </p>
                     <p>or use common test account credentials:</p>
@@ -64,9 +72,11 @@ export const Login = () => {
                     <FormGroup>
                         <TextField label="Email" margin="normal" {...formik.getFieldProps('email')}/>
                         {formik.touched.email && formik.errors.email && <p>{formik.errors.email}</p>}
-                        <TextField type="password" label="Password" margin="normal" {...formik.getFieldProps('password')}/>
+                        <TextField type="password" label="Password"
+                                   margin="normal" {...formik.getFieldProps('password')}/>
                         {formik.touched.password && formik.errors.password && <p>{formik.errors.password}</p>}
-                        <FormControlLabel label={'Remember me'} control={<Checkbox checked={formik.values.rememberMe} {...formik.getFieldProps('rememberMe')}/>}/>
+                        <FormControlLabel label={'Remember me'} control={<Checkbox
+                            checked={formik.values.rememberMe} {...formik.getFieldProps('rememberMe')}/>}/>
                         <Button type={'submit'} variant={'contained'} color={'primary'}>
                             Login
                         </Button>

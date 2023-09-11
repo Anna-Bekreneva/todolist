@@ -1,8 +1,8 @@
 import React from "react";
 import {Alert, Snackbar} from "@mui/material";
-import {useAppDispatch, useAppSelector} from "app/store";
 import {appActions, ErrorStatusType} from "app/app-reducer";
 import {selectAppError} from "app/app-selectors";
+import {useAppDispatch, useAppSelector} from "common/hooks";
 
 export const ErrorSnackbar = () => {
     const error = useAppSelector<ErrorStatusType>(selectAppError)
