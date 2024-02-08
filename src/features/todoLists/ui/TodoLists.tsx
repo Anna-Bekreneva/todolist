@@ -12,7 +12,7 @@ export const TodoLists = memo(() => {
 
     useEffect(() => {
         if (!isLoggedIn) return
-        dispatch(todolistsThunks.setTodolists())
+        if (!todolists.length) dispatch(todolistsThunks.setTodolists())
     }, [])
 
     const todoListComponents = todolists.map(tl => {

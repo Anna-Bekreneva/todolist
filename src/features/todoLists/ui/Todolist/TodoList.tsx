@@ -17,7 +17,7 @@ const TodoList = memo((props: TodoListPropsType) => {
 		= useTodoList(props.filter, props.id)
 
 	useEffect(() => {
-		dispatch(tasksThunks.setTasks({todolistId: props.id}))
+		if (!tasks.length) dispatch(tasksThunks.setTasks({todolistId: props.id}))
 	}, [])
 
 	const getTasksListItem = (t: TaskDomainType) => {
@@ -27,7 +27,7 @@ const TodoList = memo((props: TodoListPropsType) => {
 	const tasksList = tasks.length > 0 ? <List> {tasksFiltered.map(getTasksListItem)} </List> : <span> Your tasks list is empty </span>;
 
 	return (
-		<div>
+		<div style={{padding: '10px'}}>
             <h3>
                 <EditableSpan title={props.title} changeTitle={changeTodoListTitle} disabled={props.entityStatus === 'loading'}/>
 				<IconButton onClick={removeTodoList} disabled={props.entityStatus === 'loading'}>
