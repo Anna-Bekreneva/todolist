@@ -1,64 +1,88 @@
-import React, {memo, useEffect} from 'react';
-import {Button, List, IconButton} from '@mui/material';
-import {AddItemForm, EditableSpan, FilterValuesType, TaskDomainType, useAppDispatch} from "../../../../common";
+import React, {FC, memo} from 'react';
+import {Button, List, IconButton, Grid, Typography, ListItem} from '@mui/material';
+import {AddItemForm, EditableSpan, FilterValuesType, TaskDomainType} from "../../../../common";
 import {useTodoList} from "./hook";
-import {Task, tasksThunks} from "../../tasks";
-import {Delete} from "@mui/icons-material";
-import {RequestStatusType} from "../../../../app";
+import {Task} from "../../tasks";
+import {Delete, DeleteOutline} from "@mui/icons-material";
 
-const TodoList = memo((props: TodoListPropsType) => {
-	const dispatch = useAppDispatch()
+export const TodoList: FC<PropsType> = memo(({id, filter, title}) => {
 
-	const {tasks, tasksFiltered, changeTodoListTitle, removeTodoList, addTask, onAllClickHandler, onActiveClickHandler, onCompletedClickHandler}
-		= useTodoList(props.filter, props.id)
+    const {
+        tasks,
+        entityStatus,
+        tasksFiltered,
+        changeTodoListTitle,
+        removeTodoList,
+        addTask,
+        onAllClickHandler,
+        onActiveClickHandler,
+        onCompletedClickHandler
+    }
+        = useTodoList(filter, id)
 
-	useEffect(() => {
-		if (!tasks.length) dispatch(tasksThunks.setTasks({todolistId: props.id}))
-	}, [])
+    const getTasksListItem = (t: TaskDomainType) => {
+        return <Task key={t.id} todolistEntityStatus={entityStatus} todolistId={id} task={t}/>
+    }
 
-	const getTasksListItem = (t: TaskDomainType) => {
-		return <Task key={t.id} todolistId={props.id} task={t}/>
-	}
+    const tasksList = tasks.length > 0 ? <List> {tasksFiltered.map(getTasksListItem)} </List> :
+        <Typography mt={'revert-layer'} > Your tasks list is empty </Typography>;
 
-	const tasksList = tasks.length > 0 ? <List> {tasksFiltered.map(getTasksListItem)} </List> : <span> Your tasks list is empty </span>;
-
-	return (
-		<div style={{padding: '10px'}}>
-            <h3>
-                <EditableSpan title={props.title} changeTitle={changeTodoListTitle} disabled={props.entityStatus === 'loading'}/>
-				<IconButton onClick={removeTodoList} disabled={props.entityStatus === 'loading'}>
-					<Delete/>
-				</IconButton>
-            </h3>
-            <AddItemForm callback={addTask} isDisabled={props.entityStatus === 'loading'}></AddItemForm>
-			{tasksList}
+    return (
+        <div style={{width: '320px'}}>
+            <Grid display={'flex'} justifyContent={'space-between'} alignItems={'center'} gap={'20px'}
+                  marginBottom={'12px'} fontSize={'20px'} fontWeight={700}>
+                <EditableSpan title={title} changeTitle={changeTodoListTitle} disabled={entityStatus === 'loading'}/>
+                <IconButton onClick={removeTodoList} disabled={entityStatus === 'loading'}>
+                    <DeleteOutline/>
+                </IconButton>
+            </Grid>
 			<div>
-				<ButtonWithMemo title={'All'} variant={'contained'} onClick={onAllClickHandler} color={props.filter === 'all' ? 'secondary' : 'primary'}></ButtonWithMemo>
-				<ButtonWithMemo title={'Active'} variant={'contained'} onClick={onActiveClickHandler} color={props.filter === 'active' ? 'secondary' : 'primary'}></ButtonWithMemo>
-				<ButtonWithMemo title={'Completed'} variant={'contained'} onClick={onCompletedClickHandler} color={props.filter === 'completed' ? 'secondary' : 'primary'}></ButtonWithMemo>
-            </div>
+				<AddItemForm callback={addTask} isDisabled={entityStatus === 'loading'} label={'New task'}/>
+				{tasksList}
+
+				{tasks.length > 0 &&
+					<List style={{display: 'flex', gap: '8px' }}>
+						<ListItem disablePadding>
+							<FilterButton
+								title={'All'}
+								variant={filter === 'all' ? 'contained' : 'outlined'}
+								onClick={onAllClickHandler}
+							/>
+						</ListItem>
+						<ListItem disablePadding>
+							<FilterButton
+								title={'Active'}
+								variant={filter === 'active' ? 'contained' : 'outlined'}
+								onClick={onActiveClickHandler}
+							/>
+						</ListItem>
+						<ListItem disablePadding>
+							<FilterButton
+								title={'Completed'}
+								variant={filter === 'completed' ? 'contained' : 'outlined'}
+								onClick={onCompletedClickHandler}
+							/>
+						</ListItem>
+					</List>}
+			</div>
         </div>
-	);
+    );
 });
 
-type ButtonWithMemoPropsType = {
-	title: string
-	onClick: () => void
-	color: 'inherit' | 'primary' | 'secondary' | 'success' | 'error' | 'info' | 'warning',
-	variant: 'text' | 'outlined' | 'contained'
+type FilterButtonPropsType = {
+    title: string
+    onClick: () => void
+    variant: 'text' | 'outlined' | 'contained'
 }
 
-const ButtonWithMemo: React.FC<ButtonWithMemoPropsType> = memo((props) => {
-	return <Button onClick={props.onClick} variant="contained" color={props.color}>
-		{props.title}
-	</Button>
+const FilterButton: FC<FilterButtonPropsType> = memo(({title, variant, onClick}) => {
+    return <Button onClick={onClick} variant={variant} size={"small"} type={'button'} fullWidth>
+        {title}
+    </Button>
 });
 
-export default TodoList;
-
-type TodoListPropsType = {
-	id: string
-	title: string
-	filter: FilterValuesType
-	entityStatus: RequestStatusType
+type PropsType = {
+    id: string
+    title: string
+    filter: FilterValuesType
 }

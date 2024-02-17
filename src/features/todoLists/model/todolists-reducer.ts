@@ -7,7 +7,6 @@ import {
     thunkTryCatch,
     TodoListDomainType
 } from "../../../common";
-import {RequestStatusType} from "../../../app";
 import {tasksActions} from "../tasks";
 import {ChangeTodoListTitleArgType, CreateTodolistArgType, todolistAPI, TodolistType} from "../api";
 
@@ -20,10 +19,6 @@ export const todolistsSlice = createSlice({
         changeTodoListFilter: (state, action: PayloadAction<{filter: FilterValuesType, id: string}>) => {
             const todolist = state.find((todolist: TodolistType) => todolist.id === action.payload.id)
             if (todolist) todolist.filter = action.payload.filter
-        },
-        changeTodoListEntityStatus: (state, action: PayloadAction<{id: string, entityStatus: RequestStatusType}>) => {
-            const todolist = state.find((todolist: TodolistType) => todolist.id === action.payload.id)
-            if (todolist) todolist.entityStatus = action.payload.entityStatus
         },
         clearTodolists: (state) => {
             return []
@@ -59,16 +54,11 @@ const removeTodolist = createAppAsyncThunk<{id: string}, {id: string}>
 ('todolists/removeTodolist', async (arg, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI
     return thunkTryCatch(thunkAPI, async () => {
-        dispatch(todolistsActions.changeTodoListEntityStatus({id: arg.id, entityStatus: "loading"}))
-        dispatch(tasksActions.changeTasksEntityStatusAtTheTodoList({todolistId: arg.id, entityStatus: 'loading'}))
         const res = await todolistAPI.deleteTodolist(arg.id)
         if (res.data.resultCode === ResultCode.success) {
-            dispatch(tasksActions.changeTasksEntityStatusAtTheTodoList({todolistId: arg.id, entityStatus: 'idle'}))
             return {id: arg.id}
         } else {
             handleServerAppError(dispatch, res.data)
-            dispatch(todolistsActions.changeTodoListEntityStatus({id: arg.id, entityStatus: "idle"}))
-            dispatch(tasksActions.changeTasksEntityStatusAtTheTodoList({todolistId: arg.id, entityStatus: 'idle'}))
             return rejectWithValue(null)
         }
     })

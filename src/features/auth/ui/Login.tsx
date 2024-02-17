@@ -1,5 +1,15 @@
 import React from 'react'
-import {Grid, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, TextField, Button} from '@mui/material';
+import {
+    Button,
+    Checkbox,
+    FormControl,
+    FormControlLabel,
+    FormGroup,
+    FormLabel,
+    Grid,
+    TextField,
+    Typography
+} from '@mui/material';
 import {Navigate} from "react-router-dom";
 import {useLogin} from "./hook";
 
@@ -14,21 +24,27 @@ export const Login = () => {
     const { isLoggedIn, formik } = useLogin()
 
     if (isLoggedIn) {
-        return <Navigate to={'/'}></Navigate>
+        return <Navigate to={'/'}/>
     }
 
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
             <FormControl>
                 <FormLabel>
-                    <p>To log in get registered
+                    <Typography variant={'body1'} marginBottom={'8px'}>
+                        To log in get registered
                         <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>
                             here
-                        </a>
-                    </p>
-                    <p>or use common test account credentials:</p>
-                    <p>Email: free@samuraijs.com</p>
-                    <p>Password: free</p>
+                        </a> or use common test account credentials:
+                    </Typography>
+                    <Typography display={'flex'} variant={'body1'}>
+                        Email:
+                        <Typography variant={'inherit'} fontWeight={600}> free@samuraijs.com </Typography>
+                    </Typography>
+                    <Typography display={'flex'} variant={'body1'}>
+                        Password:
+                        <Typography variant={'inherit'} fontWeight={600}> free </Typography>
+                    </Typography>
                 </FormLabel>
                 <form action="features/auth/model/Login#" onSubmit={formik.handleSubmit}>
                     <FormGroup>

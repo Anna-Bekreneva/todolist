@@ -5,7 +5,7 @@ import {
     TodoListDomainType,
     UpdateTaskArgType
 } from "../../../../common";
-import {tasksActions, tasksReducer, tasksThunks} from "./tasks-reducer";
+import {tasksReducer, tasksThunks} from "./tasks-reducer";
 import {todolistsThunks} from "../../model";
 import {TodolistType} from "../../api";
 import {TaskType} from "../api";
@@ -301,21 +301,4 @@ test('tasks should be set', () => {
     }
     const endState = tasksReducer({}, action)
     expect(endState['todolistId2'].length).toBe(2)
-})
-
-test('entity status should be change', () => {
-    const action = tasksActions.changeTaskEntityStatus({todolistId: 'todolistId1', taskId: '2', entityStatus: 'loading'})
-
-    const endState = tasksReducer(startState, action)
-
-    expect(endState['todolistId1'][1].entityStatus).toBe('loading')
-})
-
-test('entity status should be change for tasks at the todolist', () => {
-	const action = tasksActions.changeTasksEntityStatusAtTheTodoList({todolistId: 'todolistId1', entityStatus: 'loading'})
-    const endState = tasksReducer(startState, action)
-
-    expect(endState['todolistId1'][0].entityStatus).toBe('loading')
-    expect(endState['todolistId1'][1].entityStatus).toBe('loading')
-    expect(endState['todolistId2'][0].entityStatus).toBe('idle')
 })

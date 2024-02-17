@@ -16,7 +16,6 @@ export const useEditableSpan = (title: string, disabled: boolean, changeTitle: (
 
     const onChangeSetTitle = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value);
 
-
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => event.key === 'Enter' && offEditMode()
 
 

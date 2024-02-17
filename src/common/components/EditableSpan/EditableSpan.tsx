@@ -2,7 +2,7 @@ import React, {memo} from 'react';
 import {TextField} from '@mui/material';
 import {useEditableSpan} from "./hook";
 
-export const EditableSpan: React.FC<EditableSpanPropsType> = memo((props) => {
+export const EditableSpan: React.FC<PropsType> = memo(({title, changeTitle, disabled}) => {
     const {
         isEditMode,
         value,
@@ -10,16 +10,25 @@ export const EditableSpan: React.FC<EditableSpanPropsType> = memo((props) => {
         onEditMode,
         offEditMode,
 		onKeyPressHandler
-    } = useEditableSpan(props.title, props.disabled, props.changeTitle)
+    } = useEditableSpan(title, disabled, changeTitle)
 
     return (
         isEditMode
-            ? <TextField type="text" onBlur={offEditMode} value={value} onChange={onChangeSetTitle} onKeyPress={onKeyPressHandler} autoFocus/>
-            : <span onDoubleClick={onEditMode}>{props.title}</span>
+            ? <TextField
+                size={'small'}
+                type="text"
+                onBlur={offEditMode}
+                value={value}
+                onChange={onChangeSetTitle}
+                onKeyPress={onKeyPressHandler}
+                autoFocus
+                fullWidth
+            />
+            : <span onDoubleClick={onEditMode}>{title}</span>
     )
 });
 
-export type EditableSpanPropsType = {
+export type PropsType = {
     title: string
     disabled: boolean
     changeTitle: (newTitle: string) => void

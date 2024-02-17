@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import {Typography, AppBar, Button, Container, IconButton, Toolbar, CircularProgress, LinearProgress} from '@mui/material';
-import {Menu} from '@mui/icons-material';
+import {AppBar, Button, CircularProgress, Container, LinearProgress, Toolbar, Typography} from '@mui/material';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {useApp} from "./hook";
 import {ErrorSnackbar} from "../../common";
@@ -23,9 +22,6 @@ function App () {
         <div className="App">
             <AppBar position="static">
                 <Toolbar style={{justifyContent: "space-between"}}>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu/>
-                    </IconButton>
                     <Typography variant="h6">
                         Todolists
                     </Typography>
@@ -33,13 +29,13 @@ function App () {
                 </Toolbar>
                 {lineProgressStatus === 'loading' && <LinearProgress />}
             </AppBar>
-            <Container style={{paddingTop: "20px"}} fixed>
+            <Container style={{paddingTop: "80px"}} fixed>
                 <Routes>
-                    <Route path={'/'} element={<TodoLists/>}></Route>
-                    <Route path={'/login'} element={<Login/>}></Route>
-                    <Route path={'/404'} element={<h1>Page not found</h1>}></Route>
-                    <Route path={'*'} element={<Navigate to={'404'}/>}></Route>
-                    <Route path={'/todolist'} element={<Navigate to={'/'}/>}></Route>
+                    <Route path={'/'} element={<TodoLists/>}/>
+                    <Route path={'/login'} element={<Login/>}/>
+                    <Route path={'/404'} element={<Typography variant={'h1'} align={'center'}>Page not found</Typography>}/>
+                    <Route path={'*'} element={<Navigate to={'404'}/>}/>
+                    <Route path={'/todolist'} element={<Navigate to={'/'}/>}/>
                 </Routes>
             </Container>
             <ErrorSnackbar/>

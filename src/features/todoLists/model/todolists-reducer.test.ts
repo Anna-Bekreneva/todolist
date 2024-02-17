@@ -115,12 +115,3 @@ test('all todolists should be set', () => {
     expect(endState.length).toBe(2);
     expect(endState[0].filter).toBe("all");
 });
-
-test('entity status should be change', () => {
-    const action = todolistsActions.changeTodoListEntityStatus({id: todolistId1, entityStatus: 'loading'})
-
-    const endState = todolistsReducer(startState, action)
-
-    expect(endState[0].entityStatus).toBe('loading')
-    expect(endState[1].entityStatus).toBe('idle')
-})
