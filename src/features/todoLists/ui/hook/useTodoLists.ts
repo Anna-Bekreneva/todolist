@@ -23,5 +23,5 @@ export const useTodoLists = () => {
         if (!todolists.length) dispatch(todolistsThunks.setTodolists())
     }, [])
 
-    return {todolists, isLoggedIn, dispatch, addTodoList, isDisabledForm}
+    return {todolists, isLoggedIn, addTodoList, isDisabledForm}
 }

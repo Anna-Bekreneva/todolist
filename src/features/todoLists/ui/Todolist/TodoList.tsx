@@ -3,7 +3,7 @@ import {Button, List, IconButton, Grid, Typography, ListItem} from '@mui/materia
 import {AddItemForm, EditableSpan, FilterValuesType, TaskDomainType} from "../../../../common";
 import {useTodoList} from "./hook";
 import {Task} from "../../tasks";
-import {Delete, DeleteOutline} from "@mui/icons-material";
+import {DeleteOutline} from "@mui/icons-material";
 
 export const TodoList: FC<PropsType> = memo(({id, filter, title}) => {
 

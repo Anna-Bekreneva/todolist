@@ -7,7 +7,6 @@ import {
     thunkTryCatch,
     TodoListDomainType
 } from "../../../common";
-import {tasksActions} from "../tasks";
 import {ChangeTodoListTitleArgType, CreateTodolistArgType, todolistAPI, TodolistType} from "../api";
 
 const todolistsInitialState: Array<TodoListDomainType> = []

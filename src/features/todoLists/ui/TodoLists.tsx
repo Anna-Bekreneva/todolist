@@ -6,7 +6,7 @@ import {useTodoLists} from "./hook";
 import {TodoList} from "./Todolist";
 
 export const TodoLists = memo(() => {
-    const {todolists, isLoggedIn, dispatch, addTodoList, isDisabledForm} = useTodoLists()
+    const {todolists, isLoggedIn, addTodoList, isDisabledForm} = useTodoLists()
 
     const todoListComponents = todolists.map(tl => {
         return (
