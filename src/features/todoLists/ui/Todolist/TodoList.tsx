@@ -1,14 +1,10 @@
 import React, {memo, useEffect} from 'react';
-import {Button, List} from '@mui/material';
-import {Delete} from '@mui/icons-material';
-import {Task} from "features/todoLists/ui/Tasks/Task";
-import {FilterValuesType, TaskDomainType} from "app/App";
-import {RequestStatusType} from "app/app-reducer";
-import IconButton from "@mui/material/IconButton";
-import {useTodoList} from "features/todoLists/ui/Todolist/hook/useTodoList";
-import {AddItemForm, EditableSpan} from "common/components";
-import {tasksThunks} from "features/todoLists/model/tasks-reducer";
-import {useAppDispatch} from "common/hooks";
+import {Button, List, IconButton} from '@mui/material';
+import {AddItemForm, EditableSpan, FilterValuesType, TaskDomainType, useAppDispatch} from "../../../../common";
+import {useTodoList} from "./hook";
+import {Task, tasksThunks} from "../../tasks";
+import {Delete} from "@mui/icons-material";
+import {RequestStatusType} from "../../../../app";
 
 const TodoList = memo((props: TodoListPropsType) => {
 	const dispatch = useAppDispatch()

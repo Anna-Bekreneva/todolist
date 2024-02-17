@@ -1,15 +1,15 @@
-import {ResultCode} from "common/api/api";
-import {FilterValuesType, TodoListDomainType} from "app/App";
-import {RequestStatusType} from "app/app-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {tasksActions} from "features/todoLists/model/tasks-reducer";
-import {createAppAsyncThunk, handleServerAppError, thunkTryCatch} from "common/utils";
 import {
-    ChangeTodoListTitleArgType,
-    CreateTodolistArgType,
-    TodolistType
-} from "features/todoLists/api/todolistsTypesApi";
-import {todolistAPI} from "features/todoLists/api/todolist-api";
+    createAppAsyncThunk,
+    FilterValuesType,
+    handleServerAppError,
+    ResultCode,
+    thunkTryCatch,
+    TodoListDomainType
+} from "../../../common";
+import {RequestStatusType} from "../../../app";
+import {tasksActions} from "../tasks";
+import {ChangeTodoListTitleArgType, CreateTodolistArgType, todolistAPI, TodolistType} from "../api";
 
 const todolistsInitialState: Array<TodoListDomainType> = []
 

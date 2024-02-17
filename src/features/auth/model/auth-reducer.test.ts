@@ -1,4 +1,4 @@
-import {AuthInitialStateType, authReducer, authThunks,} from "features/auth/model/auth-reducer";
+import {AuthInitialStateType, authReducer, authThunks} from "./auth-reducer";
 
 let startState: AuthInitialStateType;
 

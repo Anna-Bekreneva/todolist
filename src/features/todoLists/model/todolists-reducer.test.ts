@@ -1,10 +1,8 @@
-import {FilterValuesType, TodoListDomainType} from 'app/App';
 import {v1} from 'uuid';
-import {
-    todolistsActions,
-    todolistsReducer, todolistsThunks
-} from 'features/todoLists/model/todolists-reducer';
-import {ChangeTodoListTitleArgType, CreateTodolistArgType, TodolistType} from "features/todoLists/api/todolistsTypesApi";
+import {FilterValuesType, TodoListDomainType} from "../../../common";
+import {todolistsActions, todolistsReducer, todolistsThunks} from './todolists-reducer';
+import {ChangeTodoListTitleArgType, CreateTodolistArgType, TodolistType} from "../api";
+
 
 let todolistId1: string;
 let todolistId2: string;

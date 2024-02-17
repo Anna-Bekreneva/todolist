@@ -1,11 +1,7 @@
-
-import {FilterValuesType, TasksStateType} from "app/App";
 import {useCallback} from "react";
-import {todolistsActions, todolistsThunks} from "features/todoLists/model/todolists-reducer";
-import {selectorTasks} from "features/todoLists/model/tasks-selectors";
-import {tasksThunks} from "features/todoLists/model/tasks-reducer";
-import {TaskStatuses} from "common/enums/enums";
-import {useAppDispatch, useAppSelector} from "common/hooks";
+import {FilterValuesType, TasksStateType, TaskStatuses, useAppDispatch, useAppSelector} from "../../../../../common";
+import {selectorTasks, tasksThunks} from "../../../tasks";
+import {todolistsActions, todolistsThunks} from "../../../model";
 
 export const useTodoList = (filter: FilterValuesType, id: string) => {
     const dispatch = useAppDispatch()

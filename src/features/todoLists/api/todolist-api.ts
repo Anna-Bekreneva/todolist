@@ -1,5 +1,5 @@
-import {api, BaseResponseType} from "common/api/api";
-import {TodolistType} from "features/todoLists/api/todolistsTypesApi";
+import {api, BaseResponseType} from "../../../common";
+import {TodolistType} from "./todolists-types-api";
 
 export const todolistAPI = {
     updateTodolist(todolistId: string, title: string) {

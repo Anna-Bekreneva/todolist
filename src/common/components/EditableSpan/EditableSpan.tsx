@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import {TextField} from '@mui/material';
-import {useEditableSpan} from "common/components/EditableSpan/hook/useEditableSpan";
+import {useEditableSpan} from "./hook";
 
 export const EditableSpan: React.FC<EditableSpanPropsType> = memo((props) => {
     const {

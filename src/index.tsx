@@ -3,9 +3,9 @@ import {createRoot} from 'react-dom/client';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
-import App from "./app/App";
 import {BrowserRouter} from "react-router-dom";
-import {store} from "app/store";
+import {store} from "./app";
+import App from "./app/ui/App";
 
 const rerenderEntireTree = () => {
     const container = document.getElementById('root') as HTMLElement
@@ -26,7 +26,7 @@ rerenderEntireTree()
 serviceWorker.unregister();
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-    module.hot.accept('./app/App', () => {
+    module.hot.accept('./app/ui/App', () => {
         rerenderEntireTree()
     })
 }

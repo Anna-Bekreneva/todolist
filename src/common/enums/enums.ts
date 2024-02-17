@@ -1,4 +1,4 @@
-import {UpdateTaskModelType} from "features/todoLists/api/tasksTypesApi";
+import {UpdateTaskModelType} from "../../features";
 
 export enum TaskStatuses {
     new = 0,

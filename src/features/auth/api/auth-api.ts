@@ -1,5 +1,5 @@
-import {api, BaseResponseType} from "common/api/api";
-import {LoginValuesType} from "features/auth/model/Login";
+import {LoginValuesType} from "../ui";
+import {api, BaseResponseType} from "../../../common";
 
 export const authAPI = {
     login(data: LoginValuesType) {

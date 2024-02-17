@@ -1,10 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import {action} from '@storybook/addon-actions';
-import TextField from '@mui/material/TextField/TextField';
-import {IconButton} from '@mui/material';
+import {TextField, IconButton} from '@mui/material';
 import {AddBoxOutlined} from '@mui/icons-material';
-import {AddItemForm} from "common/components";
+import {AddItemForm} from "../common";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 

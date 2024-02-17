@@ -1,3 +1,3 @@
-export {AddItemForm} from './AddItemForm/AddItemForm'
-export {EditableSpan} from './EditableSpan/EditableSpan'
-export {ErrorSnackbar} from './ErrorSnackbar/ErrorSnackbar'
+export * from './AddItemForm'
+export * from './EditableSpan'
+export * from './ErrorSnackbar'

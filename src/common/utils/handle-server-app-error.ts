@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {BaseResponseType} from "common/api/api";
-import {appActions} from "app/app-reducer";
+import {appActions} from "../../app";
+import {BaseResponseType} from "../api";
 
 export const handleServerAppError = <T>(dispatch: Dispatch, data: BaseResponseType<T>, showError: boolean = true) => {
     if (showError) {

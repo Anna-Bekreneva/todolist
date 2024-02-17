@@ -1,11 +1,10 @@
-import {LoginValuesType} from "features/auth/model/Login";
-import {authAPI} from "features/auth/api/auth-api";
-import {ResultCode} from "common/api/api";
-import {createAppAsyncThunk, handleServerAppError, thunkTryCatch} from "common/utils";
-import {todolistsActions} from "features/todoLists/model/todolists-reducer";
-import {appActions} from "app/app-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {tasksActions} from "features/todoLists/model/tasks-reducer";
+import {createAppAsyncThunk, handleServerAppError, ResultCode, thunkTryCatch} from "common";
+import {LoginValuesType} from "../ui";
+import {authAPI} from "../api";
+import {appActions} from "../../../app";
+import {tasksActions, todolistsActions} from "../../todoLists";
+
 
 const authInitialState = {
     isLoggedIn: false

@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
-import {appActions} from "app/app-reducer";
 import axios from "axios";
+import {appActions} from "../../app";
 
 export const handleServerNetworkError = (dispatch: Dispatch, error: unknown) => {
     let errorMessage = "Some error occurred"
