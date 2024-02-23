@@ -30,14 +30,14 @@ export const Login = () => {
     return <Grid container justifyContent={'center'}>
         <Grid item justifyContent={'center'}>
             <FormControl>
-                <FormLabel>
-                    <Typography variant={'body1'} marginBottom={'8px'}>
-                        To log in get registered
+                <FormLabel style={{marginBottom: '12px'}}>
+                    <Typography variant={'body1'} marginBottom={'12px'}>
+                        To log in get registered {' '}
                         <a href={'https://social-network.samuraijs.com/'} target={'_blank'}>
                             here
                         </a> or use common test account credentials:
                     </Typography>
-                    <Typography display={'flex'} variant={'body1'}>
+                    <Typography display={'flex'} variant={'body1'} marginBottom={'4px'}>
                         Email:
                         <Typography variant={'inherit'} fontWeight={600}> free@samuraijs.com </Typography>
                     </Typography>
