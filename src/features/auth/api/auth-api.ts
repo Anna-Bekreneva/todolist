@@ -10,5 +10,8 @@ export const authAPI = {
     },
     me() {
         return api.get<BaseResponseType<LoginValuesType>>('auth/me')
+    },
+    captcha() {
+        return api.get<{url: string}>('security/get-captcha-url')
     }
 }

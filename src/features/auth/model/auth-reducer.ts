@@ -5,9 +5,9 @@ import {authAPI} from "../api";
 import {appActions} from "../../../app";
 import {tasksActions, todolistsActions} from "../../todoLists";
 
-
 const authInitialState = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    captcha: '' as string | null
 }
 
 export const authSlice = createSlice({
@@ -16,6 +16,9 @@ export const authSlice = createSlice({
     reducers: {
         setIsLoggedIn: (state, action: PayloadAction<{isLoggedIn: boolean}>) => {
             state.isLoggedIn = action.payload.isLoggedIn
+        },
+        setCaptcha: (state, action: PayloadAction<{captcha: string | null}>) => {
+            state.captcha = action.payload.captcha
         }
     },
 })
@@ -27,11 +30,24 @@ const setIsLoggedIn = createAppAsyncThunk<undefined, { data: LoginValuesType }>
         const res = await authAPI.login(args.data)
         if (res.data.resultCode === ResultCode.success) {
             dispatch(authActions.setIsLoggedIn({isLoggedIn: true}));
+        } else if (res.data.resultCode === ResultCode.captcha) {
+            dispatch(authThunks.getCaptcha())
         } else {
             const isShowAppError = !res.data.fieldsErrors.length;
             handleServerAppError(dispatch, res.data, isShowAppError)
             return rejectWithValue(res.data)
         }
+    })
+})
+
+const getCaptcha = createAppAsyncThunk<undefined, undefined>
+('auth/captcha', async (_, thunkAPI) => {
+    const { dispatch} = thunkAPI
+
+    return thunkTryCatch(thunkAPI, async() => {
+        const response = await authAPI.captcha()
+        dispatch(authActions.setCaptcha({captcha: response.data.url}))
+        return undefined
     })
 })
 
@@ -54,5 +70,5 @@ const logout = createAppAsyncThunk<undefined, undefined>
 
 export const authReducer = authSlice.reducer
 export const authActions = authSlice.actions
-export const authThunks = {setIsLoggedIn, logout}
+export const authThunks = {setIsLoggedIn, logout, getCaptcha}
 export type AuthInitialStateType = typeof authInitialState
