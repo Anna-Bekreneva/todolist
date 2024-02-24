@@ -4,7 +4,8 @@ let startState: AuthInitialStateType;
 
 beforeEach(() => {
     startState = {
-        isLoggedIn: false
+        isLoggedIn: false,
+        captcha: ''
     }
 })
 

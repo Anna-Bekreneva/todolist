@@ -4,7 +4,7 @@ import {AppBar, Button, CircularProgress, Container, LinearProgress, Toolbar, Ty
 import {Navigate, Route, Routes} from "react-router-dom";
 import {useApp} from "./hook";
 import {ErrorSnackbar} from "../../common";
-import {authThunks, Login, TodoLists} from "../../features";
+import {authThunks, Error404, Login, TodoLists} from "../../features";
 
 function App () {
     const {isInitialized, dispatch, isLoggedIn, lineProgressStatus} = useApp()
@@ -33,7 +33,7 @@ function App () {
                 <Routes>
                     <Route path={'/'} element={<TodoLists/>}/>
                     <Route path={'/login'} element={<Login/>}/>
-                    <Route path={'/404'} element={<Typography variant={'h1'} align={'center'}>Page not found</Typography>}/>
+                    <Route path={'/404'} element={<Error404/>}/>
                     <Route path={'*'} element={<Navigate to={'404'}/>}/>
                     <Route path={'/todolist'} element={<Navigate to={'/'}/>}/>
                 </Routes>
