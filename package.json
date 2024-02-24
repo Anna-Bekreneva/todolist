@@ -42,7 +42,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -62,6 +64,7 @@
   "devDependencies": {
     "@storybook/addon-actions": "^7.6.17",
     "@storybook/react": "^7.6.17",
-    "@storybook/testing-library": "^0.2.2"
+    "@storybook/testing-library": "^0.2.2",
+    "@types/webpack-env": "^1.18.4"
   }
 }

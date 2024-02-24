@@ -3,7 +3,7 @@ import {createRoot} from 'react-dom/client';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux';
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 import {store} from "./app";
 import App from "./app/ui/App";
 
@@ -12,9 +12,9 @@ const rerenderEntireTree = () => {
     const root = createRoot(container);
     root.render(
         <Provider store={store}>
-            <BrowserRouter>
+            <HashRouter>
                 <App/>
-            </BrowserRouter>
+            </HashRouter>
         </Provider>
     );
 }
@@ -25,8 +25,8 @@ rerenderEntireTree()
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-// if (process.env.NODE_ENV === 'development' && module.hot) {
-//     module.hot.accept('./app/ui/App', () => {
-//         rerenderEntireTree()
-//     })
-// }
+if (process.env.NODE_ENV === 'development' && module.hot) {
+    module.hot.accept('./app/ui/App', () => {
+        rerenderEntireTree()
+    })
+}
