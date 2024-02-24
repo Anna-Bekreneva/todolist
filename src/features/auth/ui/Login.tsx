@@ -17,11 +17,12 @@ export type LoginValuesType = {
     email: string,
     password: string,
     rememberMe: boolean
+    captcha?: string
 }
 
 export const Login = () => {
 
-    const { isLoggedIn, formik } = useLogin()
+    const { isLoggedIn, formik, captcha } = useLogin()
 
     if (isLoggedIn) {
         return <Navigate to={'/'}/>
@@ -48,10 +49,26 @@ export const Login = () => {
                 </FormLabel>
                 <form action="features/auth/model/Login#" onSubmit={formik.handleSubmit}>
                     <FormGroup>
-                        <TextField label="Email" margin="normal" {...formik.getFieldProps('email')}/>
+                        <TextField label="Email"
+                                   margin="normal"
+                                   {...formik.getFieldProps('email')}
+                        />
                         {formik.touched.email && formik.errors.email && <p>{formik.errors.email}</p>}
-                        <TextField type="password" label="Password"
-                                   margin="normal" {...formik.getFieldProps('password')}/>
+                        <TextField type="password"
+                                   label="Password"
+                                   margin="normal"
+                                   {...formik.getFieldProps('password')}
+                        />
+
+                        {captcha && <>
+                            <img src={captcha} alt="captcha"/>
+                            <TextField type="text"
+                                       label="Enter symbols"
+                                       margin="normal"
+                                {...formik.getFieldProps('captcha')}/>
+                            </>
+                        }
+
                         {formik.touched.password && formik.errors.password && <p>{formik.errors.password}</p>}
                         <FormControlLabel label={'Remember me'} control={<Checkbox
                             checked={formik.values.rememberMe} {...formik.getFieldProps('rememberMe')}/>}/>

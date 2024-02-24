@@ -23,7 +23,7 @@ const TaskCopy = () => {
 	return <Task todolistId={'todolistId1'} task={task}/>;
 };
 
-const Template: ComponentStory<typeof Task> = (args) => <TaskCopy/>;
+const Template: ComponentStory<typeof Task> = (args: any) => <TaskCopy/>;
 
 export const TaskWithReduxStory = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args

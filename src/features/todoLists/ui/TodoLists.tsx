@@ -1,4 +1,4 @@
-import {Grid, Paper} from "@mui/material";
+import {Grid, Paper, Typography} from "@mui/material";
 import React, {memo} from "react";
 import {Navigate} from "react-router-dom";
 import {AddItemForm} from "../../../common";
@@ -28,7 +28,11 @@ export const TodoLists = memo(() => {
                 <AddItemForm callback={addTodoList} label={'New todolist'} isDisabled={isDisabledForm}/>
             </Grid>
             <Grid wrap={'nowrap'} overflow={'auto'} spacing={4} paddingBottom={'32px'} container>
-                {todoListComponents}
+                { todolists.length
+                    ? todoListComponents
+                    : <Typography align={'center'} marginTop={'12px'} width={'100%'} fontSize={'24px'} fontWeight={'600'}>
+                        No todolists
+                      </Typography> }
             </Grid>
         </>
     )

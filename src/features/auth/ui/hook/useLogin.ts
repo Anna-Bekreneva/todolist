@@ -1,5 +1,5 @@
 import {BaseResponseType, useAppDispatch, useAppSelector} from "../../../../common";
-import {authThunks, selectIsLoggedIn} from "../../model";
+import {authThunks, selectCaptcha, selectIsLoggedIn} from "../../model";
 import {FormikHelpers, useFormik} from "formik";
 import * as Yup from "yup";
 import {LoginValuesType} from "../Login";
@@ -7,12 +7,14 @@ import {LoginValuesType} from "../Login";
 export const useLogin = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector<boolean>(selectIsLoggedIn)
+    const captcha = useAppSelector<string | null>(selectCaptcha)
 
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
-            rememberMe: false
+            rememberMe: false,
+            captcha: undefined
         },
 
         validationSchema: Yup.object({
@@ -33,5 +35,5 @@ export const useLogin = () => {
         },
     });
 
-    return { isLoggedIn, formik }
+    return { isLoggedIn, formik, captcha }
 }

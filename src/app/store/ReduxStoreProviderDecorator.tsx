@@ -37,7 +37,8 @@ const initialGlobalState = {
     },
 
     auth: {
-        isLoggedIn: false
+        isLoggedIn: false,
+        captcha: null
     },
 }
 
